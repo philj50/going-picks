@@ -2,19 +2,29 @@
 *{box-sizing:border-box} html{-webkit-text-size-adjust:100%}
 body{margin:0; font-family:-apple-system,system-ui,sans-serif; background:var(--bg,#f6f2e8); color:var(--ink,#1c1a15)}
 .mhead{position:relative; z-index:5; display:flex; align-items:center; gap:10px; padding:12px 14px;
-  padding-top:calc(12px + env(safe-area-inset-top)); background:var(--surface,#fffdf7); border-bottom:none}
+  padding-top:calc(12px + env(safe-area-inset-top)); background:var(--surface,#fffdf7);
+  border-bottom:1px solid var(--hairline,#e5ddc9)}
 .mhead .t{font-weight:700; font-size:18px} .mhead .d{font-size:13px; color:var(--ink-3,#8a8272)}
 .mhead .full{margin-left:auto; font-size:13px; color:var(--brass,#a07d2a); text-decoration:none}
-.msticky{position:sticky; top:0; z-index:8; background:var(--bg,#f6f2e8);
-  border-bottom:1px solid var(--hairline,#e5ddc9); box-shadow:0 1px 0 rgba(0,0,0,.03)}
-.mtabs{display:flex; gap:6px; padding:10px 14px 4px}
-.mtabs a{flex:1; text-align:center; padding:9px 4px; border-radius:10px; font-size:12px; font-weight:600;
-  text-decoration:none; color:var(--ink-2,#55503f); background:var(--surface,#fffdf7); border:1px solid var(--hairline,#e5ddc9);
-  display:flex; flex-direction:column; align-items:center; justify-content:center; gap:1px;
-  -webkit-tap-highlight-color:transparent; touch-action:manipulation; line-height:1.15}
-.mtabs a small{font-size:10px; font-weight:600; opacity:.72}
-.mtabs a.on{background:var(--brass,#a07d2a); color:#fff; border-color:var(--brass,#a07d2a)}
-.mtabs a.on small{opacity:.9}
+/* Fixed bottom nav — 5 equal slots */
+.mnav{position:fixed; left:0; right:0; bottom:0; z-index:30; display:flex; gap:0;
+  padding:6px 4px calc(6px + env(safe-area-inset-bottom));
+  background:var(--surface,#fffdf7); border-top:1px solid var(--hairline,#e5ddc9);
+  box-shadow:0 -4px 16px rgba(28,26,21,.06)}
+.mnav a{flex:1; min-width:0; display:flex; flex-direction:column; align-items:center; justify-content:center;
+  gap:2px; padding:6px 2px 4px; text-decoration:none; color:var(--ink-3,#8a8272);
+  -webkit-tap-highlight-color:transparent; touch-action:manipulation; border-radius:10px}
+.mnav a .ic{width:22px; height:22px; display:flex; align-items:center; justify-content:center}
+.mnav a .ic svg{width:22px; height:22px; stroke:currentColor; fill:none; stroke-width:1.8;
+  stroke-linecap:round; stroke-linejoin:round}
+.mnav a .lab{font-size:10px; font-weight:700; letter-spacing:.02em; line-height:1.1;
+  font-variant-numeric:tabular-nums; white-space:nowrap}
+.mnav a.on{color:var(--brass,#a07d2a); background:rgba(160,125,42,.08)}
+.mnav a.on .ic svg{stroke-width:2.1}
+/* legacy alias — keep old class harmless if referenced */
+.msticky{display:contents}
+.mtabs{display:none}
+.mlist{padding:10px 12px calc(88px + env(safe-area-inset-bottom))}
 .mrole{margin:8px 12px 0; padding:8px 12px; border-radius:10px; font-size:12.5px; font-weight:600;
   color:var(--ink-2,#55503f); background:var(--surface-2,#f2ecdb); border:1px solid var(--hairline,#e5ddc9)}
 .mrole b{color:var(--ink,#1c1a15)}
@@ -33,9 +43,88 @@ body.mday-tomorrow .mrole{background:#eef3ef}
 .msort a{padding:6px 12px; border-radius:999px; text-decoration:none; font-weight:700; font-size:13px;
   color:var(--ink-2,#55503f); background:var(--surface,#fffdf7); border:1px solid var(--hairline,#e5ddc9)}
 .msort a.on{background:var(--ink,#1c1a15); color:#fff; border-color:var(--ink,#1c1a15)}
-.mlist{padding:10px 12px calc(28px + env(safe-area-inset-bottom))}
 .msec{margin:14px 2px 8px; font-size:13px; font-weight:700; text-transform:uppercase;
   letter-spacing:.06em; color:var(--ink-3,#8a8272)}
+/* Tomorrow: meetings use the same section typography as .msec */
+.mmeet{margin:0 0 4px; background:transparent; border:none; border-radius:0; overflow:visible}
+.mmeet>summary{list-style:none; display:flex; align-items:baseline; justify-content:space-between;
+  gap:10px; margin:14px 2px 8px; padding:0; cursor:pointer; font-size:13px; font-weight:700;
+  text-transform:uppercase; letter-spacing:.06em; color:var(--ink-3,#8a8272);
+  -webkit-tap-highlight-color:transparent}
+.mmeet>summary::-webkit-details-marker{display:none}
+.mmeet>summary::before{content:"▸"; font-size:11px; margin-right:6px; display:inline-block;
+  transition:transform .15s; letter-spacing:0; text-transform:none}
+.mmeet[open]>summary::before{transform:rotate(90deg)}
+.mmeet-name{flex:1; min-width:0; overflow:hidden; text-overflow:ellipsis; white-space:nowrap}
+.mmeet>summary .sub{font-weight:700; font-size:13px; letter-spacing:.06em; color:var(--ink-3,#8a8272);
+  text-transform:uppercase; flex:none}
+.mmeet-body{padding:0; border:none}
+.mcard-tmr{margin-bottom:10px}
+.mcard-tmr .msum{min-width:5.5rem}
+.mrunners{margin:0; border:none; border-top:1px solid var(--hairline,#e5ddc9); border-radius:0;
+  background:transparent; overflow:visible}
+.mrunners>summary{list-style:none; padding:10px 14px; cursor:pointer; font-size:13px; font-weight:700;
+  color:var(--ink-3,#8a8272); -webkit-tap-highlight-color:transparent}
+.mrunners>summary::-webkit-details-marker{display:none}
+.mrunners>summary::before{content:"▸"; font-size:11px; margin-right:6px; display:inline-block;
+  transition:transform .15s}
+.mrunners[open]>summary::before{transform:rotate(90deg)}
+/* Races with no model/AI bet: collapsed, greyed out of the betting profile */
+.mnobet{margin:8px 0 12px; border:1px solid var(--hairline,#e5ddc9); border-radius:12px;
+  background:var(--surface-2,#f2ecdb); overflow:hidden}
+.mnobet>summary{color:var(--ink-3,#8a8272); font-weight:600}
+.mnobet .mmeet-runner{color:var(--ink-3,#8a8272); border-bottom-color:var(--hairline,#e5ddc9)}
+.mnobet .mmeet-rname,.mnobet .listed-horse-name{color:var(--ink-3,#8a8272)}
+.mnobet .listed-horse-rank{color:var(--ink-3,#8a8272); opacity:.8}
+.mmeet-nobet>summary,.mmeet-nobet .mmeet-name,.mmeet-nobet>summary .sub{
+  color:var(--ink-3,#8a8272)}
+.mmeet-nobet .mmeet-runner,.mmeet-nobet .listed-horse-name{color:var(--ink-3,#8a8272)}
+.mmeet-runners{display:flex; flex-direction:column; gap:0; padding:0 14px 12px}
+.mmeet-runner{display:block; padding:8px 0; font-size:14px; line-height:1.35;
+  color:var(--ink,#1c1a15); border-bottom:1px solid var(--hairline,#e5ddc9); background:transparent}
+.mmeet-rrow{display:flex; justify-content:space-between; align-items:baseline; gap:12px}
+.mmeet-runner:last-child{border-bottom:none}
+.mmeet-runner.pick{font-weight:700; color:var(--ink,#1c1a15)}
+.mmeet-runner.pick .listed-horse-name::after{content:" · Model"; font-weight:600; font-size:12px;
+  color:var(--brass,#a07d2a)}
+.ai-runner.winner{color:#2f7a50;background:#eef8f1;border-radius:6px;padding-left:7px;padding-right:7px}
+.ai-runner.consensus-wrong{color:#a43e32;background:#fbefed;border-radius:6px;padding-left:7px;padding-right:7px}
+.mmeet-odds{flex:none; color:var(--ink-3,#8a8272); font-variant-numeric:tabular-nums; font-size:13px}
+.mfield-horses{display:flex; flex-wrap:wrap; justify-content:flex-end; gap:5px 9px}
+.mfield-horse{display:block; text-align:left}
+.mmeet-rsub{margin-top:2px; font-size:12px; font-weight:400; color:var(--ink-3,#8a8272); line-height:1.3}
+.mrace-name{padding:10px 14px 0; font-size:12.5px; font-style:italic; color:var(--ink-2,#55503f)}
+.mconn{color:var(--ink-2,#55503f)}
+.mmeet-rp{color:var(--brass,#a07d2a); text-decoration:none; font-weight:700}
+.mgoing{text-transform:none !important; letter-spacing:0 !important; font-weight:600 !important}
+.mquip{margin-top:3px; font-size:12.5px; font-style:italic; color:var(--brass,#a07d2a); line-height:1.35}
+.mintel{padding:6px 14px 0; font-size:12.5px; color:var(--ink-2,#55503f); line-height:1.4}
+.mintel::before{content:"B8 "; color:var(--brass,#a07d2a); font-size:10px}
+.mhorse{margin:10px 14px; border-radius:10px; background:var(--surface-2,#f2ecdb);
+  border:1px solid var(--hairline,#e5ddc9); color:var(--ink,#1c1a15); overflow:hidden}
+.mhorse>summary{list-style:none; padding:10px 12px; cursor:pointer; font-size:13px; font-weight:800;
+  -webkit-tap-highlight-color:transparent}
+.mhorse>summary::-webkit-details-marker{display:none}
+.mhorse>summary::before{content:"▸"; display:inline-block; margin-right:6px; font-size:11px;
+  color:var(--ink-3,#8a8272); transition:transform .15s}
+.mhorse[open]>summary::before{transform:rotate(90deg)}
+.mhorse-body{padding:0 12px 10px}
+.mhorse-row{display:flex;justify-content:space-between;align-items:baseline;gap:12px;padding:4px 0;
+  font-size:12.5px;border-bottom:1px solid var(--hairline,#e5ddc9)}
+.mhorse-row:last-of-type{border-bottom:0}
+.mhorse-row span{color:var(--ink-3,#8a8272)} .mhorse-row b{text-align:right;font-weight:650}
+.mhorse a,.mhorse-more a,.minfo-run a{color:var(--brass,#a07d2a);text-decoration:none}
+.mhorse-more{padding-top:7px;font-size:12.5px;font-weight:750;text-align:right}
+.erank{font-size:11px; color:var(--ink-3,#8a8272); white-space:nowrap}
+.listed-horse-name{display:block; overflow:hidden; text-overflow:ellipsis; white-space:nowrap}
+.listed-horse-rank{display:block; margin-top:1px; font-size:11px; line-height:1.15;
+  font-weight:600; color:var(--ink-3,#8a8272); font-variant-numeric:tabular-nums}
+.topfive-name,.mname.topfive{color:var(--brass,#a07d2a); font-weight:800}
+.minfo-run{margin:0 0 8px;padding:10px 12px;border-radius:10px;background:var(--surface,#fffdf7);
+  border:1px solid var(--hairline,#e5ddc9);font-size:12.5px;line-height:1.4}
+.minfo-run .h{font-size:14px;font-weight:750;margin-bottom:2px}.minfo-run .s{color:var(--ink-3,#8a8272)}
+.minfo-result{margin-top:3px;color:var(--ink-2,#55503f)}
+.minfo-more{margin:8px 0}.minfo-more .minfo-run{margin:8px 8px 0}
 .mpending{margin:8px 0 12px; border-radius:12px; background:var(--surface-2,#f2ecdb);
   border:1px solid var(--hairline,#e5ddc9); overflow:hidden}
 .mpending > summary{list-style:none; padding:12px 14px; cursor:pointer; font-size:13.5px; font-weight:700;
@@ -48,36 +137,7 @@ body.mday-tomorrow .mrole{background:#eef3ef}
 .mcard{background:var(--surface,#fffdf7); border:1px solid var(--hairline,#e5ddc9); border-radius:14px;
   margin-bottom:10px; overflow:hidden}
 .mcard.top{border-color:var(--brass,#a07d2a)}
-.mcard.potd{background:#1a3a32; border:2px solid #4FB286; color:#f3edda;
-  scroll-margin-top:88px}
-.mcard.potd.hist.hit{border-color:#4FB286; background:#16382f}
-.mcard.potd.hist.miss{border-color:#c4705a; background:#3a241f}
-.mcard.potd .mrank,.mcard.potd .mname,.mcard.potd .mrow2{color:#f3edda}
-.mcard.potd .mmark.ok{color:#7ddea8} .mcard.potd .mmark.bad{color:#f0a090}
-.mcard.potd .msum .msi i{color:#a89f88}
-.mcard.potd .msum .msi b{color:#f3edda}
-.mcard.potd .msum.hit .msi b{color:#7ddea8} .mcard.potd .msum.miss .msi b{color:#f0a090}
-.mcard.potd .lt{color:#d9d0b8} .mcard.potd .lt em{color:#f3edda}
-.mcard.potd .lt::before{background:#a89f88}
-.mcard.potd .lt.g::before{background:#4FB286; box-shadow:0 0 4px #4FB28655}
-.mcard.potd .lt.r::before{background:#c4705a; box-shadow:0 0 4px #c4705a55}
-.mcard.potd .mwagers{background:rgba(255,255,255,.08); color:#d9d0b8}
-.mcard.potd .mwagers .wlbl,.mcard.potd .mwagers .wag.off{color:#a89f88}
-.mcard.potd .mwagers .wag.on{color:#f3edda}
-.mcard.potd .mwagers .wag.alt{color:#e0b882}
-.mcard.potd .mres{background:rgba(255,255,255,.08); border-color:rgba(243,237,218,.25); color:#f3edda}
-.mcard.potd .mres .ok{color:#7ddea8} .mcard.potd .mres .bad{color:#f0a090}
-/* Nested panels keep light surfaces — reset ink so cream-on-cream isn't invisible */
-.mcard.potd .mcum,.mcard.potd .ai-analyses,
-.mcard.potd .ai-consensus-banner,.mcard.potd .ai-tab,.mcard.potd .ai-content{
-  color:var(--ink,#1c1a15)}
-.mcard.potd .mwhy{color:#d9d0b8} /* reasons sit on the dark card, not a light panel */
-.mcard.potd .mcum-h,.mcard.potd .ai-tab .ai-meta .k,
-.mcard.potd .ai-tab .ai-pick,.mcard.potd .ai-tab .ai-meta{
-  color:var(--ink-2,#55503f)}
-.mcard.potd .mcum-row .off{color:var(--ink-3,#8a8272)}
-.mcard.potd .ai-consensus-banner{background:#fff; border-left-color:#4FB286}
-.mcard.potd .ai-chip{color:var(--ink-2,#55503f); background:#fff; border-color:var(--hairline,#e5ddc9)}
+.mcard#mpotd{scroll-margin-top:88px}
 .mcard.hist{border-style:solid; background:var(--surface-2,#f2ecdb)}
 .mcard.hist.pending{opacity:.92; border-left:3px solid #b7ae96}
 .mcard summary{list-style:none; padding:12px 14px; cursor:pointer; -webkit-tap-highlight-color:transparent}
@@ -102,6 +162,9 @@ body.mday-tomorrow .mrole{background:#eef3ef}
 .mcard.hist.hit{border-left:3px solid #2f9e63}
 .mcard.hist.miss{border-left:3px solid #c14a2e}
 .mrow2{margin-top:5px; font-size:13.5px; color:var(--ink-2,#55503f); line-height:1.5}
+.mpotd-mark{display:inline-block; margin-left:7px; padding:1px 6px; border-radius:7px;
+  background:#4FB28622; color:#277553; font-size:10px; font-weight:800;
+  letter-spacing:.04em; text-transform:uppercase; vertical-align:1px}
 .mres{margin-top:7px; font-size:13px; line-height:1.45; color:var(--ink,#1c1a15);
   padding:7px 10px; border-radius:10px; background:#fff; border:1px solid var(--hairline,#e5ddc9)}
 .mres .ok{color:#1f7a4d; font-weight:700} .mres .bad{color:#a3452a; font-weight:700}
@@ -116,6 +179,32 @@ body.mday-tomorrow .mrole{background:#eef3ef}
 .mwagers .wag.on{color:var(--ink,#1c1a15); font-weight:600}
 .mwagers .wag.off{color:var(--ink-3,#8a8272)}
 .mwagers .wag.alt{color:#8a5a2b; font-weight:600}
+/* Settled race: lights + credits merged (one line per voice) */
+.mcred{margin-top:8px; border-radius:12px; background:var(--surface-2,#f2ecdb);
+  border:1px solid var(--hairline,#e5ddc9); overflow:hidden}
+.mcred-champ{padding:9px 12px; font-size:13.5px; font-weight:700; color:var(--ink,#1c1a15);
+  line-height:1.35; display:flex; flex-wrap:wrap; align-items:baseline; gap:4px 8px}
+.mcred-champ.miss{font-weight:600; color:var(--ink-2,#55503f)}
+.mcred-champ .star{color:var(--brass,#a07d2a); letter-spacing:.02em}
+.mcred-champ .sub{font-size:12px; font-weight:600; color:var(--ink-3,#8a8272)}
+.mcred-champ .pnl{font-variant-numeric:tabular-nums}
+.mcred-champ .pnl.pos{color:#1f7a4d}.mcred-champ .pnl.neg{color:#a3452a}
+.mcred-open{margin:0 14px 10px}
+.mcred-h{padding:8px 12px 0; font-size:11px; font-weight:700; text-transform:uppercase;
+  letter-spacing:.05em; color:var(--ink-3,#8a8272)}
+.mcred-body{padding:8px 10px 10px; display:flex; flex-direction:column; gap:4px}
+.mcred-row{display:grid; grid-template-columns:auto 1fr auto; gap:6px 8px; align-items:center;
+  padding:7px 8px; border-radius:10px; background:var(--surface,#fffdf7); font-size:12.5px;
+  line-height:1.3}
+.mcred-row.champ{border:1px solid #c8a24b55; background:#faf6ea}
+.mcred-row.sit{opacity:.72}
+.mcred-row .nm{font-weight:700; color:var(--ink,#1c1a15)}
+.mcred-row .horse{font-size:11.5px; color:var(--ink-3,#8a8272); font-weight:600}
+.mcred-row .stats{grid-column:1 / -1; display:flex; flex-wrap:wrap; gap:6px 10px;
+  font-size:11.5px; color:var(--ink-2,#55503f); font-variant-numeric:tabular-nums}
+.mcred-row .stats b{color:var(--ink,#1c1a15); font-weight:700}
+.mcred-row .pnl.pos{color:#1f7a4d; font-weight:700}
+.mcred-row .pnl.neg{color:#a3452a; font-weight:700}
 .mcum{margin:0 14px 10px; padding:10px 12px; border-radius:10px; background:var(--surface-2,#f2ecdb);
   border:1px solid var(--hairline,#e5ddc9); font-size:13px}
 .mcum-h{font-size:11px; font-weight:700; text-transform:uppercase; letter-spacing:.05em;
@@ -131,7 +220,15 @@ body.mday-tomorrow .mrole{background:#eef3ef}
   font-variant-numeric:tabular-nums}
 .lt::before{content:""; width:12px; height:12px; border-radius:50%; background:#c9c2b1; flex:none}
 .lt.g::before{background:#2f9e63; box-shadow:0 0 4px #2f9e6355}
+.lt.a::before{background:#D9A441; box-shadow:0 0 4px #D9A44155}
 .lt.r::before{background:#c14a2e; box-shadow:0 0 4px #c14a2e55}
+.lt.dual::before{display:none}
+.lt .ldots{display:inline-flex; gap:3px; flex:none; align-items:center}
+.lt .ldots i{width:12px; height:12px; border-radius:50%; background:#c9c2b1;
+  display:inline-block; font-style:normal}
+.lt .ldots i.g{background:#2f9e63; box-shadow:0 0 4px #2f9e6355}
+.lt .ldots i.a{background:#D9A441; box-shadow:0 0 4px #D9A44155}
+.lt .ldots i.r{background:#c14a2e; box-shadow:0 0 4px #c14a2e55}
 .mwhy{margin:0; padding:0 14px 6px 30px; font-size:14px; color:var(--ink-2,#55503f); line-height:1.6}
 .mcard .ai-analyses{margin:6px 10px 12px; padding:10px; background:var(--surface-2,#f2ecdb); border-radius:12px}
 .mcard .ai-consensus-banner{margin-bottom:8px; padding:8px 10px; background:#fff; border-left:3px solid var(--brass,#a07d2a);
@@ -165,11 +262,6 @@ body.mday-tomorrow .mrole{background:#eef3ef}
 .mpm .ai-meta{padding:0 12px 8px; font-size:13px; color:var(--ink-2,#55503f)}
 .mpm .ai-meta .k{font-weight:700; font-size:11px; text-transform:uppercase; letter-spacing:.04em;
   color:var(--ink-3,#8a8272); margin-right:4px}
-.mcard.potd .mpm{background:#163028}
-.mcard.potd .mpm .ai-tab{background:#1a2e22; color:#e8e0cc}
-.mcard.potd .mpm-h,.mcard.potd .mpm .ai-meta .k,.mcard.potd .mpm-pending{color:#9a9278}
-.mcard.potd .mpm .ai-content,.mcard.potd .mpm .ai-meta{color:#d9d0b8}
-.mcard.potd .mpm .ai-pick{color:#b8b09a}
 .mempty{padding:40px 20px; text-align:center; color:var(--ink-3,#8a8272); font-size:15px}
 .mnap{margin:10px 12px 0; padding:14px 16px; border-radius:14px; background:#20443a; color:#f3edda;
   display:block; text-decoration:none}
@@ -180,10 +272,35 @@ a.mnap.pick:active{opacity:.92}
 .mnap.pick.lost{border-color:#c4705a; background:#3a241f}
 .mnap.pick .nto{font-size:12px; opacity:.8; margin-top:8px; font-weight:600}
 .mnap.bank{background:var(--surface,#fffdf7); color:var(--ink,#1c1a15); border:1px solid var(--hairline,#e5ddc9)}
+.mnap.bank .mme-exp{margin-top:8px; padding-top:8px; border-top:1px solid var(--hairline,#e5ddc9);
+  font-size:13px}
+.mnap.bank .mme-exp.voice:first-of-type{margin-top:6px; padding-top:4px; border-top:0}
+.mnap.bank .mme-exp summary{font-weight:700; cursor:pointer; color:var(--brass,#a07d2a)}
+.mnap.bank .mme-exp.mme-me{margin:14px 0; padding-top:14px; padding-bottom:6px}
+.mnap.bank .mme-row{font-size:13px; padding:4px 0}
+.mnap.bank .mme-row.won{color:var(--turf,var(--color-racing-green,#2f6b52))}
+.mnap.bank .mme-row.lost{color:var(--clay,var(--color-racing-red,#a3452a))}
+.mnap.bank .mme-row.won .sub,.mnap.bank .mme-row.lost .sub{color:inherit}
+.mnap.bank .nt-row{display:flex; align-items:center; justify-content:space-between; gap:10px;
+  margin-bottom:2px}
+.mnap.bank .bsort{display:flex; align-items:center; gap:6px; font-size:11px; font-weight:600;
+  color:var(--ink-3,#8a8272); letter-spacing:.02em}
+.mnap.bank .bsort select{font:inherit; font-size:12px; font-weight:600; color:var(--ink,#1c1a15);
+  border:1px solid var(--hairline,#e5ddc9); border-radius:8px; padding:4px 6px;
+  background:var(--surface-2,#f2ecdb); max-width:9.5rem}
+.mnap.bank .mme-exp.voice summary .sub{font-weight:500; color:var(--ink-3,#8a8272)}
+.mbets{margin:8px 14px 10px; padding:0; border-radius:10px; background:var(--surface-2,#f2ecdb);
+  border:1px solid var(--hairline,#e5ddc9); font-size:13px}
+.mbets>summary{padding:10px 12px; font-weight:700; cursor:pointer; color:var(--brass,#a07d2a);
+  list-style:none}
+.mbets>summary::-webkit-details-marker{display:none}
+.mbets[open]>summary{border-bottom:1px solid var(--hairline,#e5ddc9)}
+.mbets .mlights{padding:8px 12px 4px; margin-top:0}
+.mbets .mcum{margin:0; padding:8px 12px 10px; background:transparent; border:0; border-radius:0}
 .mnap .nt{font-size:13px; letter-spacing:.04em; opacity:.9; font-weight:700; line-height:1.3}
 .mnap .nh{font-size:20px; font-weight:700; margin:6px 0 4px; line-height:1.25; word-break:break-word}
 .mnap .nr{font-size:14px; opacity:.92; line-height:1.45}
-.mnap.bank .nt{opacity:.7; color:var(--ink-2,#55503f)}
+.mnap.bank .nt{opacity:.7; color:var(--ink-2,#55503f); margin:0}
 .mnap.bank .nr{opacity:1; font-size:14px; color:var(--ink,#1c1a15); line-height:1.5}
 .mnap .mres.potd-res{margin-top:10px; background:rgba(255,255,255,.08); border-color:rgba(243,237,218,.25); color:#f3edda}
 .mnap .mres.potd-res .ok{color:#7ddea8} .mnap .mres.potd-res .bad{color:#f0a090}
@@ -199,14 +316,21 @@ a.mnap.pick:active{opacity:.92}
   background:var(--surface,#fffdf7); border:1px solid var(--hairline,#e5ddc9); color:var(--ink-2,#55503f)}
 .mfresh b{font-variant-numeric:tabular-nums}
 .mfresh.stale,.mfresh.fail{border-color:#c4705a; background:#f8eee9}
+.mfresh.archive{background:#ece7da; border-color:#d5cdb8; color:var(--ink-3,#8a8272)}
 .mfresh .hint{color:var(--ink-3,#8a8272); font-size:11px}
 .mpulse{margin:8px 12px 0; padding:8px 12px; border-radius:10px; font-size:12px; line-height:1.4;
   color:var(--ink-2,#55503f); background:var(--surface-2,#f2ecdb); border:1px solid var(--hairline,#e5ddc9)}
 .mmai{display:inline-block; margin-top:6px; font-size:11px; font-weight:700; padding:2px 8px;
   border-radius:8px; background:#a3452a18; color:#a3452a; letter-spacing:.02em}
-.mcard.potd .mmai{background:rgba(192,112,90,.25); color:#f0a090}
-.mperf{margin:10px 12px calc(20px + env(safe-area-inset-bottom)); padding:12px 14px; border-radius:14px;
+.mperf{margin:10px 12px calc(96px + env(safe-area-inset-bottom)); padding:12px 14px; border-radius:14px;
   background:var(--surface,#fffdf7); border:1px solid var(--hairline,#e5ddc9)}
+.mperf.intop{margin:2px 0 12px}
+.ai-runners{margin:8px 12px 4px; padding:0}
+.ai-runners .ai-runner{display:flex; justify-content:space-between; gap:10px;
+  font-size:12.5px; line-height:1.35; padding:3px 0; border-bottom:1px solid var(--hairline,#e5ddc9)}
+.ai-runners .ai-runner:last-child{border-bottom:0}
+.ai-runners .ai-runner span{color:var(--ink-3,#8a8272); font-variant-numeric:tabular-nums;
+  flex:none; font-weight:700}
 .mperf-h{display:flex; justify-content:space-between; align-items:baseline; gap:10px;
   font-size:11px; font-weight:700; text-transform:uppercase; letter-spacing:.05em;
   color:var(--ink-3,#8a8272); margin-bottom:8px}
@@ -219,60 +343,148 @@ a.mnap.pick:active{opacity:.92}
   color:var(--ink-3,#8a8272); line-height:1.25}
 .mperf-tile .v{font-size:15px; font-weight:700; margin-top:3px; font-variant-numeric:tabular-nums;
   color:var(--ink,#1c1a15); line-height:1.2}
-.mcfg{margin:12px;padding:14px;background:var(--surface,#fffdf7);border-radius:14px;border:1px solid var(--hairline,#e5ddc9)}.mcfg-row{display:flex;justify-content:space-between;align-items:center;gap:12px;padding:10px 0;border-bottom:1px solid var(--hairline,#e5ddc9);font-size:14px}.mcfg-row input[type=number]{width:90px;padding:6px 8px;border-radius:8px;border:1px solid var(--hairline,#e5ddc9)}.mlog{margin:12px;padding:14px;background:var(--surface,#fffdf7);border-radius:14px;border:1px solid var(--hairline,#e5ddc9);font-size:12.5px;line-height:1.45;white-space:pre-wrap;overflow-x:auto}.mout{margin:8px 12px 0;padding:8px 12px;border-radius:10px;font-size:12.5px;background:#f8eee9;border:1px solid #e8c4b8;color:var(--ink-2,#55503f)}.mme{margin:10px 12px 0;padding:12px 14px;border-radius:14px;background:var(--surface,#fffdf7);border:1px solid var(--hairline,#e5ddc9)}.mme-h{font-size:13px;font-weight:700;margin-bottom:8px}.mme-row{font-size:13px;padding:4px 0}.mme-exp{margin-top:8px;font-size:13px}.mme-exp summary{font-weight:700;cursor:pointer;color:var(--brass,#a07d2a)}.mnap.bank .mme-exp{padding-top:4px;border-top:1px solid var(--hairline,#e5ddc9)}.ai-prompt{margin:8px 0;padding:10px;background:#fff;border:1px dashed var(--brass,#a07d2a);border-radius:10px}.ai-prompt summary{font-weight:700;font-size:13px;color:var(--brass,#a07d2a);cursor:pointer}.mmeet-block{margin:10px 12px 16px;padding:0;}.mmeet-course{margin:14px 0 8px;font-size:15px;font-weight:700}.mmeet-race{margin:0 0 8px;padding:10px 12px;background:var(--surface,#fffdf7);border:1px solid var(--hairline,#e5ddc9);border-radius:12px}.mmeet-race.has-pick{border-left:4px solid var(--brass,#a07d2a)}</style></head><body class="mobile mday-log theme-light"><div class="mhead"><span class="t">Going</span><span class="d">Thu 16 Jul</span><a class="full" href="/m?day=config">Config →</a></div><div class="msticky"><nav class="mtabs"><a class="mtab" href="yesterday.html">Yesterday</a><a class="mtab" href="index.html">Today</a><a class="mtab" href="tomorrow.html">Tomorrow</a><a class="mtab on" href="log.html">Log</a><a class="mtab" href="config.html">Config</a></nav></div><main class="mlist"><div class="mrole"><b>Day log</b> — what happened on 2026-07-16 · also used in AI briefs</div><pre class="mlog"># Going — 2026-07-16
+/* Credits Stats (/m?day=stats) */
+.mrange{display:flex; gap:6px; flex-wrap:wrap; margin:8px 0 4px}
+.mrange a{padding:7px 12px; border-radius:999px; text-decoration:none; font-weight:700; font-size:12.5px;
+  color:var(--ink-2,#55503f); background:var(--surface,#fffdf7); border:1px solid var(--hairline,#e5ddc9)}
+.mrange a.on{background:var(--ink,#1c1a15); color:#fff; border-color:var(--ink,#1c1a15)}
+.mform{display:flex; flex-wrap:wrap; gap:6px; margin:8px 0 4px}
+.mform .chip{display:inline-flex; align-items:center; gap:4px; padding:5px 10px; border-radius:999px;
+  font-size:12px; font-weight:700; background:var(--surface,#fffdf7); border:1px solid var(--hairline,#e5ddc9);
+  color:var(--ink,#1c1a15)}
+.mform .chip.W{border-color:#4FB28655; color:#2f6b52}
+.mform .chip.L{border-color:#c4705a55; color:#a3452a}
+.mstat{margin:0 0 10px; background:var(--surface,#fffdf7); border:1px solid var(--hairline,#e5ddc9);
+  border-radius:14px; overflow:hidden}
+.mstat>summary{list-style:none; padding:12px 14px; cursor:pointer; -webkit-tap-highlight-color:transparent}
+.mstat>summary::-webkit-details-marker{display:none}
+.mstat>summary::before{content:"▸"; font-size:11px; margin-right:6px; display:inline-block;
+  transition:transform .15s; color:var(--ink-3,#8a8272)}
+.mstat[open]>summary::before{transform:rotate(90deg)}
+.mstat-row{display:flex; align-items:baseline; justify-content:space-between; gap:10px}
+.mstat-name{font-size:15px; font-weight:700; color:var(--ink,#1c1a15)}
+.mstat-meta{display:flex; flex-wrap:wrap; gap:8px 12px; margin-top:6px; font-size:12px;
+  color:var(--ink-3,#8a8272); font-variant-numeric:tabular-nums}
+.mstat-meta b{color:var(--ink,#1c1a15); font-weight:700}
+.mstat-pnl{font-size:15px; font-weight:700; font-variant-numeric:tabular-nums; flex:none}
+.mstat-pnl.pos{color:#2f6b52}.mstat-pnl.neg{color:#a3452a}
+.mstat-legs{padding:10px 14px 12px; display:flex; flex-direction:column; gap:6px;
+  border-top:1px solid var(--hairline,#e5ddc9)}
+.mstat-leg{display:grid; grid-template-columns:1fr auto; gap:2px 10px; padding:8px 10px;
+  border-radius:10px; background:var(--surface-2,#f2ecdb); font-size:12.5px; line-height:1.35}
+.mstat-leg .h{font-weight:700; color:var(--ink,#1c1a15)}
+.mstat-leg .s{color:var(--ink-3,#8a8272); font-size:11.5px}
+.mstat-leg .r{font-weight:700; font-variant-numeric:tabular-nums}
+.mstat-leg .r.won{color:#2f6b52}.mstat-leg .r.lost{color:#a3452a}
+.mstat-leg .r.pending{color:var(--ink-3,#8a8272)}
+.mstat-more{margin-top:6px; border-radius:10px; background:var(--surface,#fffdf7);
+  border:1px solid var(--hairline,#e5ddc9); overflow:hidden}
+.mstat-more>summary{list-style:none; padding:9px 11px; cursor:pointer; font-size:12.5px;
+  font-weight:700; color:var(--brass,#a07d2a); -webkit-tap-highlight-color:transparent}
+.mstat-more>summary::-webkit-details-marker{display:none}
+.mstat-more>summary::before{content:"▸"; display:inline-block; margin-right:6px; font-size:11px;
+  transition:transform .15s; color:var(--ink-3,#8a8272)}
+.mstat-more[open]>summary::before{transform:rotate(90deg)}
+.mstat-more .meta{font-weight:600; color:var(--ink-3,#8a8272); font-size:11.5px}
+.mstat-bucket{margin:4px 8px 8px; border-radius:10px; background:var(--surface-2,#f2ecdb);
+  border:1px solid var(--hairline,#e5ddc9); overflow:hidden}
+.mstat-bucket>summary{list-style:none; padding:8px 10px; cursor:pointer; font-size:12.5px;
+  font-weight:700; color:var(--ink,#1c1a15); -webkit-tap-highlight-color:transparent}
+.mstat-bucket>summary::-webkit-details-marker{display:none}
+.mstat-bucket>summary::before{content:"▸"; display:inline-block; margin-right:6px; font-size:11px;
+  transition:transform .15s; color:var(--ink-3,#8a8272)}
+.mstat-bucket[open]>summary::before{transform:rotate(90deg)}
+.mstat-bucket .meta{font-weight:600; color:var(--ink-3,#8a8272); font-size:11.5px; margin-left:4px}
+.mstat-bucket .mstat-legs{padding:8px 8px; border-top:none}
+.mhot-more{margin-top:4px}
+.mhot-more .mhot-v{margin-top:8px}
+.mhot-more>summary{list-style:none; padding:6px 2px; cursor:pointer; font-size:12px;
+  font-weight:700; color:var(--brass,#a07d2a)}
+.mhot-more>summary::-webkit-details-marker{display:none}
+.mchart{margin:0 0 12px; padding:12px 10px; background:var(--surface,#fffdf7);
+  border:1px solid var(--hairline,#e5ddc9); border-radius:14px}
+.mchart .legend{display:flex; flex-wrap:wrap; gap:8px 12px; font-size:11.5px; color:var(--ink-3,#8a8272)}
+.mchart .legend i{display:inline-block; width:10px; height:10px; border-radius:2px; margin-right:4px;
+  vertical-align:-1px}
+.mchart .foot-note{font-size:12.5px; color:var(--ink-3,#8a8272); padding:8px}
+.mhot{margin:0 0 10px; background:var(--surface,#fffdf7); border:1px solid var(--hairline,#e5ddc9);
+  border-radius:14px; overflow:hidden}
+.mhot>summary{list-style:none; padding:12px 14px; cursor:pointer; -webkit-tap-highlight-color:transparent}
+.mhot>summary::-webkit-details-marker{display:none}
+.mhot>summary::before{content:"▸"; font-size:11px; margin-right:6px; display:inline-block;
+  transition:transform .15s; color:var(--ink-3,#8a8272)}
+.mhot[open]>summary::before{transform:rotate(90deg)}
+.mhot-title{font-size:14px; font-weight:700; color:var(--ink,#1c1a15)}
+.mhot-sub{font-size:12px; color:var(--ink-3,#8a8272); margin-top:3px}
+.mhot-body{padding:0 14px 12px; border-top:1px solid var(--hairline,#e5ddc9);
+  display:flex; flex-direction:column; gap:6px}
+.mhot-v{display:flex; justify-content:space-between; gap:10px; padding:8px 10px; border-radius:10px;
+  background:var(--surface-2,#f2ecdb); font-size:12.5px}
+.mhot-v.win{background:#e8f3ec}
+.mhot-v .nm{font-weight:700}
+.mhot-v .cr{font-variant-numeric:tabular-nums; color:var(--ink-3,#8a8272); flex:none}
+.mentity-filter{margin:10px 0 12px; padding:10px; border-radius:12px;
+  background:var(--surface,#fffdf7); border:1px solid var(--hairline,#e5ddc9)}
+.mentity-filter form{display:grid; grid-template-columns:auto 1fr auto; gap:7px}
+.mentity-filter select,.mentity-filter input,.mentity-filter button{min-width:0; padding:8px 9px;
+  border-radius:8px; border:1px solid var(--hairline,#e5ddc9); font:inherit}
+.mentity-filter button{background:var(--brass,#a07d2a); color:#fff; font-weight:700}
+.mstats-entity{margin:0 0 14px; border-radius:14px; overflow:hidden;
+  background:var(--surface,#fffdf7); border:1px solid var(--hairline,#e5ddc9)}
+.mstats-entity>summary{list-style:none; cursor:pointer; padding:11px 13px; font-weight:800}
+.mstats-entity>summary::-webkit-details-marker{display:none}
+.mstats-entity>summary::before{content:"▸"; display:inline-block; margin-right:6px;
+  color:var(--ink-3,#8a8272); transition:transform .15s}
+.mstats-entity[open]>summary::before{transform:rotate(90deg)}
+.mstats-entity-body{padding:0 2px 10px}
+.mentity-rank{display:grid; grid-template-columns:22px 1fr; gap:2px 8px; padding:7px 8px;
+  border-radius:9px; background:var(--surface-2,#f2ecdb); font-size:12.5px}
+.mentity-rank .posn{grid-row:1 / 3; font-weight:800; color:var(--ink-3,#8a8272)}
+.mentity-rank .nm{font-weight:750}.mentity-rank .record{color:var(--ink-3,#8a8272)}
+.mentity-rank .record b{color:var(--ink,#1c1a15)}
+.mentity-top .mstat-legs{gap:6px}
+.mcfg{margin:12px;padding:14px;background:var(--surface,#fffdf7);border-radius:14px;border:1px solid var(--hairline,#e5ddc9)}.mcfg-row{display:flex;justify-content:space-between;align-items:center;gap:12px;padding:10px 0;border-bottom:1px solid var(--hairline,#e5ddc9);font-size:14px}.mcfg-row input[type=number]{width:90px;padding:6px 8px;border-radius:8px;border:1px solid var(--hairline,#e5ddc9)}.mcfg-explain>span{display:flex;flex-direction:column;gap:2px}.mcfg-explain small{max-width:210px;color:var(--ink-3,#8a8272);line-height:1.25}.mcfg-explain>b{font-size:12.5px;text-align:right}.mcfg-more{margin:8px 0 14px}.mcfg-more>summary{cursor:pointer;font-weight:700;color:var(--brass,#a07d2a);padding:8px 0}.mimp{padding:9px 0;border-bottom:1px solid var(--hairline,#e5ddc9);font-size:13px;line-height:1.35}.mimp small{display:block;color:var(--ink-3,#8a8272);margin-top:3px}.mlog{margin:12px;padding:14px;background:var(--surface,#fffdf7);border-radius:14px;border:1px solid var(--hairline,#e5ddc9);font-size:12.5px;line-height:1.45;white-space:pre-wrap;overflow-x:auto}.mout{margin:8px 12px 0;padding:8px 12px;border-radius:10px;font-size:12.5px;background:#f8eee9;border:1px solid #e8c4b8;color:var(--ink-2,#55503f)}.mme{margin:10px 12px 0;padding:12px 14px;border-radius:14px;background:var(--surface,#fffdf7);border:1px solid var(--hairline,#e5ddc9)}.mme-h{font-size:13px;font-weight:700;margin-bottom:8px}.mme-row{font-size:13px;padding:4px 0}.mme-exp{margin-top:8px;font-size:13px}.mme-exp summary{font-weight:700;cursor:pointer;color:var(--brass,#a07d2a)}.mnap.bank .mme-exp{padding-top:4px;border-top:1px solid var(--hairline,#e5ddc9)}.ai-prompt{margin:8px 0;padding:10px;background:#fff;border:1px dashed var(--brass,#a07d2a);border-radius:10px}.ai-prompt summary{font-weight:700;font-size:13px;color:var(--brass,#a07d2a);cursor:pointer}</style></head><body class="mobile mday-log theme-light"><div class="mhead"><span class="t">Going</span><span class="d">Mon 20 Jul</span></div><main class="mlist"><div class="mrole"><b>Day log</b> — what happened on 2026-07-20 · also used in AI briefs</div><pre class="mlog"># Going — 2026-07-20
 
-- Card races: **0** · AI report races: **32**
-- Pick of the day: **My Mate Roger** (Hamilton 2:50)
-- Outstanding voices: **32 races** (cerebras×2, ollama×32)
+- Card races: **0** · AI report races: **23**
+- Outstanding voices: **7 races** (groq×4, ollama×7)
 
 ## Credit bankrolls
-- **model**: 1052cr
-- **cursor**: 999cr
-- **nvidia**: 1023cr
-- **groq**: 1020cr
-- **cerebras**: 1026cr
-- **ollama**: 1119cr
+- **claude**: 1336cr
+- **openai**: 1260cr
+- **groq**: 965cr
+- **model**: 977cr
+- **nvidia**: 992cr
+- **cursor**: 944cr
+- **cerebras**: 862cr
+- **ollama**: 1042cr
 
 ## Me bets (paper)
-- £6 **Lyrics Of Life** (Chepstow 2:05) · paper
-- £2 **Zarakova** (Epsom 5:45) · paper
-- £2 **Eutropia** (Epsom 6:20) · paper
-- £4 **Classy Clarets** (Hamilton 2:15) · paper
-- £13 **My Mate Roger** (Hamilton 2:50) · paper
-- £2 **Doon The Glen** (Hamilton 4:35) · paper
-- £1 **Alnayef** (Hamilton 5:10) · paper
+- £17 **Water Of Leith** (Ayr 2:30) · paper
+- £6 **Imperial Guard** (Ayr 3:00) · paper
+- £7 **Jordan Electrics** (Ayr 3:30) · paper
 
 ## Races
-- **Chepstow 2:05** — togetheragainfestival.co.uk Maiden Fillies&#x27; Stakes (GBB Race): model **Lyrics Of Life** (cursor, nvidia, groq, cerebras, ollama?) · stakes: cursor 4cr→Lyrics Of Life, nvidia 5cr→Lyrics Of Life, groq 5cr→Lyrics Of Life, cerebras 5cr→Lyrics Of Life, model 11cr→Lyrics Of Life
-- **Chepstow 2:40** — Lsl Racing Horse Sales Syndication Leasing Apprentice Handicap Stakes: model **—** (cursor, nvidia, groq, cerebras, ollama?) · stakes: cursor 2cr→Savannah Smiles, nvidia 2cr→Punchbowl Flyer, groq 2cr→Punchbowl Flyer, cerebras 2cr→Savannah Smiles
-- **Chepstow 3:15** — EBF / Ub40 Ft. Ali Campbell 24th July Restricted Novice Stakes (For Horses In Bands B, C And D) (EBF Restricted Race Qualifier) (GBB Race): model **Amber Ocean** (cursor, nvidia, groq, cerebras, ollama?) · stakes: cursor 3cr→Blondie Larry, nvidia 1cr→Amber Ocean, groq 1cr→Amber Ocean, cerebras 3cr→Blondie Larry, model 1cr→Amber Ocean
-- **Chepstow 3:50** — Fairplay Daily Price Boosts Handicap Stakes: model **—** (cursor, nvidia, groq, cerebras, ollama?) · stakes: cursor 1cr→Dappled Light, nvidia 1cr→Dappled Light, groq 1cr→Dappled Light, cerebras 1cr→Kodi Fire
-- **Chepstow 4:25** — Bet Now With fairplaybet.co.uk Handicap Stakes: model **—** (cursor, nvidia, groq, cerebras, ollama?) · stakes: cursor 6cr→Bear To Dream, nvidia 1cr→Autumn Angel, groq 1cr→Autumn Angel, cerebras 1cr→Scarfo
-- **Chepstow 5:00** — Dragonbet Welsh Racing Festival 9th-11th October Handicap Stakes: model **—** (cursor, nvidia, groq, cerebras, ollama?) · stakes: cursor 2cr→Be An Angel, nvidia 2cr→Serenity Dream, groq 2cr→Serenity Dream, cerebras 2cr→Be An Angel
-- **Chepstow 5:30** — Chepstow Family Fun Day 31st August Handicap Stakes: model **Bumaan** (cursor, nvidia, groq, cerebras, ollama?) · stakes: cursor 1cr→Electric Bass, nvidia 4cr→Bumaan, groq 4cr→Bumaan, cerebras 4cr→Bumaan, model 9cr→Bumaan
-- **Epsom 5:45** — Betfred &#x27;The Classic Bookmaker&#x27; EBF Maiden Stakes (GBB Race): model **—** (cursor, nvidia, groq, cerebras, ollama?) · stakes: cursor 1cr→Zarakova, nvidia 2cr→Zarakova, groq 2cr→Zarakova, cerebras 1cr→Zarakova
-- **Epsom 6:20** — Steve Donoghue Handicap Stakes: model **—** (cursor, nvidia, groq, cerebras, ollama?) · stakes: cursor 1cr→Eutropia, nvidia 2cr→Eutropia, groq 2cr→Eutropia, cerebras 2cr→Eutropia
-- **Epsom 6:55** — Chantilly Handicap Stakes: model **Booziebrunch** (cursor, nvidia, groq, cerebras, ollama?) · stakes: cursor 2cr→Perfect Scoundrel, nvidia 1cr→Booziebrunch, groq 1cr→Booziebrunch, cerebras 1cr→Booziebrunch, model 2cr→Booziebrunch
-- **Epsom 7:30** — Betfred Ladies&#x27; Derby Handicap Stakes (For Female Amateur Jockeys) (GBBPlus Race): model **—** (cursor, nvidia, groq, cerebras, ollama?) · stakes: cursor 1cr→Pride Of Nepal, nvidia 1cr→Pride Of Nepal, groq 1cr→Pride Of Nepal, cerebras 2cr→Carnival Day
-- **Epsom 8:05** — Vail Williams Handicap Stakes: model **Atmosphere** (cursor, nvidia, groq, cerebras, ollama?) · stakes: cursor 2cr→Uppercase, nvidia 2cr→Atmosphere, groq 2cr→Atmosphere, cerebras 1cr→Cherry Cobbler, model 5cr→Atmosphere
-- **Epsom 8:40** — Betfred Everswift 30 July Handicap Stakes: model **—** (cursor, nvidia, groq, cerebras, ollama?) · stakes: cursor 7cr→Mayfair Market, nvidia 1cr→Piazza, groq 1cr→Piazza, cerebras 10cr→Mayfair Market
-- **Hamilton 1:40** — British Stallions Studs EBF Nursery Handicap Stakes (A Hamilton Park 2-Y-O Series Qualifier): model **Tango Hotel** (cursor, nvidia, groq, cerebras, ollama?) · stakes: cursor 2cr→Call Nicki, nvidia 2cr→Tango Hotel, groq 2cr→Tango Hotel, cerebras 2cr→Tango Hotel, model 4cr→Tango Hotel
-- **Hamilton 2:15** — Wellman Cars Hamilton Handicap Stakes: model **—** (cursor, nvidia, groq, cerebras, ollama?) · stakes: cursor 4cr→Classy Clarets, nvidia 5cr→Classy Clarets, groq 5cr→Classy Clarets, cerebras 4cr→Classy Clarets
-- **Hamilton 2:50** — Alex McWilliams Memorial Celebrations Restricted Novice Stakes (For Horses In Bands B, C And D) (GBB Race): model **My Mate Roger** (cursor, nvidia, groq, cerebras, ollama?) · stakes: cursor 8cr→My Mate Roger, nvidia 9cr→My Mate Roger, groq 9cr→My Mate Roger, cerebras 9cr→My Mate Roger, model 29cr→My Mate Roger
-- **Hamilton 3:25** — Wellman Cars Private Hire Almada Mile Handicap Stakes: model **—** (cursor, nvidia, groq, cerebras, ollama?) · stakes: cursor 1cr→English Oak, nvidia 3cr→I&#x27;ll Be Back, groq 2cr→I&#x27;ll Be Back, cerebras 1cr→I&#x27;ll Be Back
-- **Hamilton 4:00** — Every Race Live On Racing TV Handicap Stakes: model **—** (cursor, nvidia, groq, cerebras, ollama?) · stakes: cursor 1cr→Jannas Journey, nvidia 2cr→Kaleido, groq 2cr→Kaleido, cerebras 1cr→Break The Bank
-- **Hamilton 4:35** — Cubeglassladiesnight@hamiltonpark Handicap Stakes: model **Doon The Glen** (cursor, nvidia, groq, cerebras?, ollama?) · stakes: cursor 1cr→Doon The Glen, nvidia 2cr→Doon The Glen, groq 2cr→Doon The Glen, model 3cr→Doon The Glen
-- **Hamilton 5:10** — Hamilton Park Centenary Year Handicap Stakes: model **Alnayef** (cursor, nvidia, groq, cerebras, ollama?) · stakes: cursor 3cr→Alnayef, nvidia 5cr→Alnayef, groq 4cr→Alnayef, cerebras 4cr→Alnayef, model 9cr→Alnayef
-- **Thirsk 1:53** — Best Ticket Deals Online @Thirskraces Book Now Restricted Maiden Fillies&#x27; Stakes (For Horses In Bands C And D) (GBB Race): model **—** (cursor, nvidia, groq, cerebras, ollama?) · stakes: cursor 5cr→Clementines Star, nvidia 6cr→Clementines Star, groq 5cr→Clementines Star, cerebras 5cr→Clementines Star
-- **Thirsk 2:28** — By Chen Presidential Apprentice Handicap Stakes: model **—** (cursor, nvidia, groq, cerebras, ollama?) · stakes: cursor 3cr→Hatamoto, nvidia 4cr→Hatamoto, groq 4cr→Hatamoto, cerebras 3cr→Hatamoto
-- **Thirsk 3:03** — Sell Your Business With Anderson Barrowcliff Handicap Stakes: model **—** (cursor, nvidia, groq, cerebras, ollama?) · stakes: cursor 1cr→Straight Ahead, nvidia 1cr→Straight Ahead, groq 1cr→Straight Ahead, cerebras 1cr→Straight Ahead
-- **Thirsk 3:38** — Don&#x27;t Miss Summer Family Days @thirskraces Classified Stakes: model **—** (cursor, nvidia, groq, cerebras, ollama?) · stakes: cursor 2cr→Trucial Pearl, nvidia 2cr→Trucial Pearl, groq 2cr→Trucial Pearl, cerebras 2cr→Trucial Pearl
-- **Thirsk 4:10** — Meijer Celebration Cup Handicap Stakes: model **—** (cursor, nvidia, groq, cerebras, ollama?) · stakes: cursor 1cr→Captain Cess, nvidia 2cr→Coconut Bay, groq 1cr→Captain Cess, cerebras 1cr→Coconut Bay
-- **Thirsk 4:45** — Thirsk Sky Bet Summer Festival Day Friday 24th July Handicap Stakes: model **—** (cursor, nvidia, groq, cerebras, ollama?) · stakes: cursor 1cr→Military Leader, nvidia 1cr→Military Leader, groq 1cr→Military Leader, cerebras 1cr→Military Leader
-- **Worcester 5:52** — CopyBet BOG Today For Tomorrow&#x27;s Racing Handicap Steeple Chase (ARC Summer Chase Series Qualifier): model **Thickthorn Tom** (cursor, nvidia, groq, cerebras, ollama?) · stakes: cursor 4cr→Thickthorn Tom, nvidia 6cr→Thickthorn Tom, groq 6cr→Thickthorn Tom, cerebras 6cr→Thickthorn Tom, model 10cr→Thickthorn Tom
-- **Worcester 6:27** — CopyBet Pay First Past The Post Handicap Steeple Chase (ARC Summer Chase Series Qualifier): model **I&#x27;m A Starman** (cursor, nvidia, groq, cerebras, ollama?) · stakes: cursor 2cr→Huckleberry Sting, nvidia 1cr→I&#x27;m A Starman, groq 1cr→I&#x27;m A Starman, cerebras 2cr→Huckleberry Sting, model 1cr→I&#x27;m A Starman
-- **Worcester 7:02** — Copybet Support Safer Gambling Maiden Hurdle Race (ARC Summer Novices&#x27; Brush Hurdle Series Qualifier) (GBB Race): model **—** (cursor, nvidia, groq, cerebras, ollama?) · stakes: cursor 2cr→Loman Lady, nvidia 2cr→Loman Lady, groq 3cr→Loman Lady, cerebras 3cr→Loman Lady
-- **Worcester 7:37** — CopyBet Daily Profit Boost Novices&#x27; Hurdle Race (GBB Race): model **Square d&#x27;Alboni** (cursor, nvidia, groq, cerebras, ollama?) · stakes: cursor 4cr→Square d&#x27;Alboni, nvidia 4cr→Square d&#x27;Alboni, groq 6cr→Square d&#x27;Alboni, cerebras 6cr→Square d&#x27;Alboni, model 11cr→Square d&#x27;Alboni
-- **Worcester 8:12** — CopyBet Follow Us On X Handicap Hurdle Race: model **—** (cursor, nvidia, groq, cerebras, ollama?) · stakes: cursor 1cr→Final Entry, nvidia 2cr→Fane Court, groq 2cr→Fane Court, cerebras 1cr→Warner&#x27;s Cross
-- **Worcester 8:47** — Copybet Overnight Best Odds Guaranteed Handicap Hurdle Race: model **—** (cursor, nvidia, groq, cerebras?, ollama?) · stakes: cursor 3cr→Phantom Gold, nvidia 1cr→October Hill, groq 1cr→October Hill
-</pre></main></body></html>
+- **Ayr 2:00** — Racing tv.com/freetrial EBF Novice Stakes (GBB Race): model **Star People** (cursor, nvidia, groq, cerebras, ollama)
+- **Ayr 2:30** — Dream Weddings At Western House Hotel Handicap Stakes: model **Water Of Leith** (cursor, nvidia, groq, cerebras, ollama)
+- **Ayr 3:00** — 25% Off Lunch At Western House Hotel Handicap Stakes: model **Imperial Guard** (cursor, nvidia, groq, cerebras, ollama)
+- **Ayr 3:30** — Fergie &amp; Myra Happel Ayr Gold Cup Trial Handicap Stakes: model **—** (cursor, nvidia, groq, cerebras, ollama)
+- **Ayr 4:00** — John Hamilton ScotRail Celebration Handicap Stakes: model **—** (cursor, nvidia, groq, cerebras, ollama)
+- **Ayr 4:30** — Try Racing TV For Free Now Handicap Stakes: model **Motawaared** (cursor, nvidia, groq, cerebras, ollama)
+- **Ayr 5:00** — Watch Racing TV Free For 31 Days Handicap Stakes: model **—** (cursor, nvidia, groq, cerebras, ollama)
+- **Beverley 6:30** — Racing TV EBF Restricted Maiden Stakes (For Horses In Bands B, C And D) (EBF Restricted Race Qualifier) (GBB Race): model **—** (cursor, nvidia, groq, cerebras, ollama)
+- **Beverley 7:00** — Happy Birthday Katie Exon Handicap Stakes: model **—** (cursor, nvidia, groq, cerebras, ollama)
+- **Beverley 7:30** — Skybet Go-Racing-In-Yorkshire Summer Festival Handicap Stakes: model **—** (cursor, nvidia, groq, cerebras, ollama)
+- **Beverley 8:00** — Napoleons Casino And Restaurant Hull Handicap Stakes: model **—** (cursor, nvidia, groq, cerebras, ollama)
+- **Beverley 8:30** — Sky Bet For The Fans Classified Stakes: model **Royal Sizzler** (cursor, nvidia, groq, cerebras, ollama)
+- **Beverley 9:00** — Racing Again Next Tuesday Handicap Stakes: model **Enamorus** (cursor, nvidia, groq, cerebras, ollama)
+- **Cartmel 1:42** — Cumbria Grand Maiden Hurdle Race (GBB Race): model **Speed For Fun** (cursor, nvidia, groq, cerebras, ollama)
+- **Cartmel 2:42** — Molson Coors Handicap Hurdle Race (Div II): model **—** (cursor, nvidia, groq, cerebras, ollama)
+- **Cartmel 3:12** — Furness Building Society Handicap Hurdle Race: model **—** (cursor, nvidia, groq, cerebras, ollama)
+- **Cartmel 3:42** — RF Miller &amp; Co Handicap Steeple Chase (GBB Race): model **—** (cursor, nvidia, groq, cerebras, ollama?)
+- **Cartmel 4:12** — Weatherbys Design &amp; Print Novices&#x27; Limited Handicap Steeple Chase (GBB Race): model **Krak** (cursor, nvidia, groq, cerebras, ollama?)
+- **Cartmel 4:47** — Old Park Wood Handicap Steeple Chase: model **Jack Sprat** (cursor, nvidia, groq?, cerebras, ollama?)
+- **Windsor 5:50** — A1r Services Ltd Nursery Handicap Stakes: model **—** (cursor, nvidia, groq, cerebras, ollama?)
+- **Windsor 6:20** — Download The At The Races App EBF Fillies&#x27; Restricted Novice Stakes (For Horses In Bands B, C And D) (EBF Restricted Race Qualifier) (GBB Race): model **Lady Rosalind** (cursor, nvidia, groq?, cerebras, ollama?)
+- **Windsor 6:50** — Join Fitzdares For A Personal Service Maiden Stakes (GBB Race): model **—** (cursor, nvidia, groq?, cerebras, ollama?)
+- **Windsor 7:20** — Fitzdares Sprint Series Handicap Stakes (Windsor Sprint Series Qualifier): model **—** (cursor, nvidia, groq?, cerebras, ollama?)
+</pre></main><nav class="mnav" aria-label="Main"><a href="yesterday.html"><span class="ic" aria-hidden="true"><svg viewBox="0 0 24 24" focusable="false"><path d="M15 6l-6 6 6 6"/></svg></span><span class="lab">19 Jul</span></a><a href="index.html"><span class="ic" aria-hidden="true"><svg viewBox="0 0 24 24" focusable="false"><path d="M4 11.5L12 4l8 7.5"/><path d="M7 10.5V20h10v-9.5"/><path d="M10 20v-5h4v5"/></svg></span><span class="lab">20 Jul</span></a><a href="tomorrow.html"><span class="ic" aria-hidden="true"><svg viewBox="0 0 24 24" focusable="false"><path d="M9 6l6 6-6 6"/></svg></span><span class="lab">21 Jul</span></a></nav></body></html>
