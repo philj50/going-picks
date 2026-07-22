@@ -31,9 +31,13 @@ def _load() -> dict:
 
 
 def review_day(date: str) -> dict:
-    """Score every voice's day book for a settled date. Returns {voice: {...}}."""
+    """Score every voice's day book for a settled date. Returns {voice: {...}}.
+
+    Also captures which prompt variant each voice was assigned to that day
+    (for A/B testing efficacy tracking)."""
     import ai_consensus
     import ai_track_record as tr
+    import prompt_variants
 
     path = REPO / "ai_reports" / f"ai_analysis_{date}.json"
     if not path.exists():
@@ -113,12 +117,18 @@ def review_day(date: str) -> dict:
                 judgment = (f"{'profit' if pnl > 0 else 'loss' if pnl < 0 else 'flat'} "
                             f"{pnl:+.0f}cr from {wins}/{n_bets - unresolved} staked")
 
+            # Capture which A/B test variant was assigned to this voice that day
+            variant = prompt_variants.select_variant_for_voice(
+                voice, dt.date.fromisoformat(date))
+            variant_name = prompt_variants.VARIANTS[variant]["name"]
+
             out[voice] = {
                 "n_bets": n_bets, "staked": staked, "wins": wins,
                 "unresolved": unresolved, "pnl": round(pnl, 1),
                 "picks": alloc.get("picks"), "method": alloc.get("method"),
                 "unbacked": ub_n, "unbacked_wins": ub_wins,
                 "style": style, "judgment": judgment,
+                "variant": variant, "variant_name": variant_name,
             }
     finally:
         con.close()

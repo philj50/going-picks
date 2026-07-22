@@ -31,6 +31,7 @@ from pathlib import Path
 import ai_config
 import brief_builder
 import going_paths
+import prompt_variants
 import race_stats
 
 # Load .env file for API keys
@@ -367,16 +368,24 @@ _PROSE_INSTR = {
 }
 
 
-def build_prompt(brief: str, voice: str | None = None) -> str:
+def build_prompt(brief: str, voice: str | None = None, date: dt.date | None = None) -> str:
     """Shared analysis prompt for all AIs. VERDICT comes first so truncation
-    still leaves pick + win_prob (Cerebras often hit token limits)."""
+    still leaves pick + win_prob (Cerebras often hit token limits).
+
+    Applies a/b test prompt variant to voice based on date."""
     # v2 briefs carry their own race-contextual lessons; only add the global
     # block for briefs (e.g. backtest legacy) that lack one.
     lessons_block = ("" if "essons from settled post-mortems" in brief
                      else _prompt_lessons_block())
     calib = _calibration_line(voice)
     prose = _PROSE_INSTR[brief_builder.prose_level(voice)]
-    return f"""You are an expert horse racing analyst. Estimate each runner's TRUE chance of winning; the market odds are context, not the answer.
+
+    # Apply prompt variant for voice (A/B testing)
+    variant_mod = ""
+    if voice:
+        variant_mod = prompt_variants.variant_modifier_for_prompt(voice, date)
+
+    return f"""You are an expert horse racing analyst. Estimate each runner's TRUE chance of winning; the market odds are context, not the answer.{variant_mod}
 
 {brief}{lessons_block}{calib}
 Reply format (strict — do not skip):
@@ -385,12 +394,13 @@ VERDICT: {{"pick": "<horse name exactly as listed, or NO BET if you would not st
 {prose}"""
 
 
-def call_claude(brief: str, dry_run: bool = False) -> str:
+def call_claude(brief: str, dry_run: bool = False, voice: str = None,
+                date: dt.date | None = None) -> str:
     """Call Claude API for analysis."""
     if dry_run:
         return "[Claude analysis would be called here]"
 
-    return _claude_raw(build_prompt(brief, "claude"))
+    return _claude_raw(build_prompt(brief, voice or "claude", date))
 
 
 def _with_retry(fn, tries: int = 3, base_sleep: int = 20) -> str:
@@ -437,12 +447,13 @@ def _claude_raw_once(prompt: str) -> str:
     except Exception as e:
         return f"ERROR calling Claude: {e}"
 
-def call_openai(brief: str, dry_run: bool = False) -> str:
+def call_openai(brief: str, dry_run: bool = False, voice: str = None,
+                date: dt.date | None = None) -> str:
     """Call OpenAI API for analysis."""
     if dry_run:
         return "[OpenAI analysis would be called here]"
 
-    return _openai_raw(build_prompt(brief, "openai"))
+    return _openai_raw(build_prompt(brief, voice or "openai", date))
 
 
 def _openai_raw(prompt: str) -> str:
@@ -496,44 +507,49 @@ def _call_openai_compatible_once(prompt: str, base_url: str, model: str, key_env
         return f"ERROR calling {label}: {e}"
 
 
-def call_gemini(brief: str, dry_run: bool = False) -> str:
+def call_gemini(brief: str, dry_run: bool = False, voice: str = None,
+                date: dt.date | None = None) -> str:
     """Google Gemini via its OpenAI-compatible endpoint (free tier)."""
     return _call_openai_compatible(
-        build_prompt(brief, "gemini"), "https://generativelanguage.googleapis.com/v1beta/openai/",
+        build_prompt(brief, voice or "gemini", date), "https://generativelanguage.googleapis.com/v1beta/openai/",
         "gemini-2.0-flash", "GEMINI_API_KEY", "Gemini", dry_run)
 
 
-def call_nvidia(brief: str, dry_run: bool = False) -> str:
+def call_nvidia(brief: str, dry_run: bool = False, voice: str = None,
+                date: dt.date | None = None) -> str:
     """NVIDIA NIM cloud API (free dev credits)."""
     return _call_openai_compatible(
-        build_prompt(brief, "nvidia"), "https://integrate.api.nvidia.com/v1",
+        build_prompt(brief, voice or "nvidia", date), "https://integrate.api.nvidia.com/v1",
         "meta/llama-3.3-70b-instruct", "NVIDIA_API_KEY", "NVIDIA", dry_run)
 
 
-def call_groq(brief: str, dry_run: bool = False) -> str:
+def call_groq(brief: str, dry_run: bool = False, voice: str = None,
+              date: dt.date | None = None) -> str:
     """Groq free tier — serves Llama 3.3 70B with a daily-renewing quota."""
     return _call_openai_compatible(
-        build_prompt(brief, "groq"), "https://api.groq.com/openai/v1",
+        build_prompt(brief, voice or "groq", date), "https://api.groq.com/openai/v1",
         "llama-3.3-70b-versatile", "GROQ_API_KEY", "Groq", dry_run)
 
 
-def call_cerebras(brief: str, dry_run: bool = False) -> str:
+def call_cerebras(brief: str, dry_run: bool = False, voice: str = None,
+                  date: dt.date | None = None) -> str:
     """Cerebras free tier — gpt-oss-120b on fast inference hardware."""
     if dry_run:
         return "[Cerebras analysis would be called here]"
     tok = ai_config.max_output_tokens("cerebras")
     return _with_retry(lambda: _call_openai_compatible_once(
-        build_prompt(brief, "cerebras"), "https://api.cerebras.ai/v1",
+        build_prompt(brief, voice or "cerebras", date), "https://api.cerebras.ai/v1",
         "gpt-oss-120b", "CEREBRAS_API_KEY", "Cerebras", max_tokens=tok))
 
 
-def call_cursor(brief: str, dry_run: bool = False) -> str:
+def call_cursor(brief: str, dry_run: bool = False, voice: str = None,
+                date: dt.date | None = None) -> str:
     """Cursor subscription voice via CURSOR_API_KEY (SDK or optional OpenAI proxy)."""
     if dry_run:
         return "[Cursor analysis would be called here]"
     if not os.getenv("CURSOR_API_KEY"):
         return "ERROR: CURSOR_API_KEY not set"
-    prompt = build_prompt(brief, "cursor")
+    prompt = build_prompt(brief, voice or "cursor", date)
     base = (os.getenv("GOING_CURSOR_BASE_URL") or "").strip()
     model = os.getenv("GOING_AI_CURSOR_MODEL", "composer-2.5")
     if base:
@@ -651,7 +667,8 @@ RAW_CALLERS = {
 }
 
 
-def call_ollama(brief: str, dry_run: bool = False) -> str:
+def call_ollama(brief: str, dry_run: bool = False, voice: str = None,
+                date: dt.date | None = None) -> str:
     """Call Ollama on Lucy for analysis. Soft-fail on timeout/unreachable."""
     if dry_run:
         return "[Ollama analysis would be called here]"
@@ -661,7 +678,7 @@ def call_ollama(brief: str, dry_run: bool = False) -> str:
     try:
         import requests
 
-        prompt = build_prompt(brief, "ollama")
+        prompt = build_prompt(brief, voice or "ollama", date)
         max_tok = ai_config.max_output_tokens("ollama")
         response = requests.post(
             "http://127.0.0.1:11434/api/generate",
@@ -797,14 +814,17 @@ def _prior_for_race(existing: dict, race: dict) -> dict:
     return by_ct.get(_race_key_course_time(race.get("course"), race.get("time"))) or {}
 
 
-def _call_with_cache(provider: str, brief: str, fn, dry_run: bool) -> str:
-    """Invoke one provider; read/write ai_config cache when enabled."""
+def _call_with_cache(provider: str, brief: str, fn, dry_run: bool,
+                      date: dt.date | None = None) -> str:
+    """Invoke one provider; read/write ai_config cache when enabled.
+
+    Passes provider and date to fn so it can apply prompt variants."""
     if dry_run:
-        return fn(brief, dry_run=True)
+        return fn(brief, dry_run=True, voice=provider, date=date)
     cached = ai_config.cache_get(provider, brief)
     if cached is not None:
         return cached
-    text = fn(brief, dry_run=False)
+    text = fn(brief, dry_run=False, voice=provider, date=date)
     ai_config.cache_put(provider, brief, text)
     return text
 
@@ -1024,9 +1044,10 @@ def analyze_today(dry_run: bool = False, day: str = "today", force: bool = False
                 brief_tiers.pop("_default", None)
                 entry["analysis_prompt"] = build_prompt(entry["race_brief"])
                 # Cloud voices in parallel first — never share a worker with Ollama
+                race_day_date = dt.date.fromisoformat(race_day) if race_day else None
                 if cloud_call:
                     with ThreadPoolExecutor(max_workers=max(1, len(cloud_call))) as ex:
-                        futures = {k: ex.submit(_call_with_cache, k, _brief_for(k), fn, dry_run)
+                        futures = {k: ex.submit(_call_with_cache, k, _brief_for(k), fn, dry_run, race_day_date)
                                    for k, fn in cloud_call}
                         for k, fut in futures.items():
                             try:
@@ -1051,7 +1072,7 @@ def analyze_today(dry_run: bool = False, day: str = "today", force: bool = False
                               f"[{ollama_new + 1}/{ollama_cap}] …")
                         try:
                             entry[f"{k}_analysis"] = _call_with_cache(
-                                k, _brief_for(k), fn, dry_run)
+                                k, _brief_for(k), fn, dry_run, race_day_date)
                         except Exception as e:
                             entry[f"{k}_analysis"] = f"ERROR: {e}"
                         n_called += 1
