@@ -34,9 +34,11 @@ def _load_report(date: str) -> dict:
         return {}
 
 
-def _winner_for_race(con: sqlite3.Connection, course: str, time: str,
+def _winner_for_race(con: sqlite3.Connection | None, course: str, time: str,
                       race_name: str) -> str | None:
     """Query DB for settled race winner."""
+    if con is None:
+        return None
     try:
         cursor = con.cursor()
         # Match by race name, course, time
@@ -61,7 +63,11 @@ def backtest_day(date: str, report: dict | None = None) -> dict:
     if not report or not report.get("races"):
         return {}
 
-    con = sqlite3.connect(tr.DB_PATH)
+    # Try to connect to DB; if it fails, demo mode (no winner data)
+    try:
+        con = sqlite3.connect(tr.DB_PATH)
+    except Exception:
+        con = None
     try:
         date_obj = dt.date.fromisoformat(date)
         results = defaultdict(lambda: defaultdict(lambda: {
@@ -123,7 +129,8 @@ def backtest_day(date: str, report: dict | None = None) -> dict:
             final[variant] = dict(voices)
         return final
     finally:
-        con.close()
+        if con:
+            con.close()
 
 
 def backtest_range(start_date: str, end_date: str,
