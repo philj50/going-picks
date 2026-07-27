@@ -69,7 +69,20 @@ body.mday-tomorrow .mrole{background:#eef3ef}
 .mrunners>summary::before{content:"▸"; font-size:11px; margin-right:6px; display:inline-block;
   transition:transform .15s}
 .mrunners[open]>summary::before{transform:rotate(90deg)}
-/* Races with no model/AI bet: collapsed, greyed out of the betting profile */
+/* No-bet races sit in the meeting timeline (same off-time order as bet cards). */
+.mnobet-slot{margin:0 0 10px; padding:10px 14px; border-radius:12px;
+  border:1px dashed var(--hairline,#e5ddc9); background:var(--surface-2,#f2ecdb);
+  color:var(--ink-3,#8a8272)}
+.mnobet-slot .mrow1{display:flex; align-items:baseline; gap:8px}
+.mnobet-slot .mrank{flex:none; width:1.25rem; text-align:center; font-weight:700;
+  color:var(--ink-3,#8a8272)}
+.mnobet-slot .mname{flex:1; min-width:0; font-weight:600; font-size:14.5px; line-height:1.3;
+  color:var(--ink-2,#55503f)}
+.mnobet-slot .mrow2{margin-top:4px; font-size:12.5px; line-height:1.4; color:var(--ink-3,#8a8272)}
+.mnobet-slot .listed-horse-name{color:var(--ink-3,#8a8272)}
+.mnobet-slot .listed-horse-rank{color:var(--ink-3,#8a8272); opacity:.8}
+.mnobet-slot .mfield-horses{justify-content:flex-start; margin-top:6px}
+/* Legacy fold (flat Likely dump) — kept for rare call sites / tests */
 .mnobet{margin:8px 0 12px; border:1px solid var(--hairline,#e5ddc9); border-radius:12px;
   background:var(--surface-2,#f2ecdb); overflow:hidden}
 .mnobet>summary{color:var(--ink-3,#8a8272); font-weight:600}
@@ -79,6 +92,7 @@ body.mday-tomorrow .mrole{background:#eef3ef}
 .mmeet-nobet>summary,.mmeet-nobet .mmeet-name,.mmeet-nobet>summary .sub{
   color:var(--ink-3,#8a8272)}
 .mmeet-nobet .mmeet-runner,.mmeet-nobet .listed-horse-name{color:var(--ink-3,#8a8272)}
+.mmeet-nobet .mnobet-slot{margin-bottom:8px}
 .mmeet-runners{display:flex; flex-direction:column; gap:0; padding:0 14px 12px}
 .mmeet-runner{display:block; padding:8px 0; font-size:14px; line-height:1.35;
   color:var(--ink,#1c1a15); border-bottom:1px solid var(--hairline,#e5ddc9); background:transparent}
@@ -163,8 +177,9 @@ body.mday-tomorrow .mrole{background:#eef3ef}
 .mcard.hist.miss{border-left:3px solid #c14a2e}
 .mrow2{margin-top:5px; font-size:13.5px; color:var(--ink-2,#55503f); line-height:1.5}
 .mpotd-mark{display:inline-block; margin-left:7px; padding:1px 6px; border-radius:7px;
-  background:#4FB28622; color:#277553; font-size:10px; font-weight:800;
-  letter-spacing:.04em; text-transform:uppercase; vertical-align:1px}
+  background:var(--color-racing-green-light,#e8f1e0); color:var(--color-racing-green,#2d5016);
+  font-size:10px; font-weight:800; letter-spacing:.04em; text-transform:uppercase;
+  vertical-align:1px; border:1px solid var(--color-racing-green,#2d5016)}
 .mres{margin-top:7px; font-size:13px; line-height:1.45; color:var(--ink,#1c1a15);
   padding:7px 10px; border-radius:10px; background:#fff; border:1px solid var(--hairline,#e5ddc9)}
 .mres .ok{color:#1f7a4d; font-weight:700} .mres .bad{color:#a3452a; font-weight:700}
@@ -263,14 +278,20 @@ body.mday-tomorrow .mrole{background:#eef3ef}
 .mpm .ai-meta .k{font-weight:700; font-size:11px; text-transform:uppercase; letter-spacing:.04em;
   color:var(--ink-3,#8a8272); margin-right:4px}
 .mempty{padding:40px 20px; text-align:center; color:var(--ink-3,#8a8272); font-size:15px}
-.mnap{margin:10px 12px 0; padding:14px 16px; border-radius:14px; background:#20443a; color:#f3edda;
-  display:block; text-decoration:none}
+/* POTD uses racing-green tokens from going-color-tokens.css (not dark hardcodes) */
+.mnap{margin:10px 12px 0; padding:14px 16px; border-radius:14px;
+  background:var(--color-racing-green-light,#e8f1e0); color:var(--ink,#1c1a15);
+  border:2px solid var(--color-racing-green,#2d5016); display:block; text-decoration:none}
 a.mnap.pick{cursor:pointer; -webkit-tap-highlight-color:transparent}
 a.mnap.pick:active{opacity:.92}
-.mnap.pick{border:2px solid #4FB286; background:#1a3a32}
-.mnap.pick.won{border-color:#4FB286; background:#16382f}
-.mnap.pick.lost{border-color:#c4705a; background:#3a241f}
-.mnap.pick .nto{font-size:12px; opacity:.8; margin-top:8px; font-weight:600}
+.mnap.pick{border-color:var(--color-racing-green,#2d5016);
+  background:var(--color-racing-green-light,#e8f1e0)}
+.mnap.pick.won{border-color:var(--color-racing-green,#2d5016);
+  background:var(--color-racing-green-pale,#f5faf2)}
+.mnap.pick.lost{border-color:var(--color-racing-red,#8b0000);
+  background:var(--color-racing-red-pale,#fff5f5)}
+.mnap.pick .nto{font-size:12px; opacity:.8; margin-top:8px; font-weight:600;
+  color:var(--color-racing-green,#2d5016)}
 .mnap.bank{background:var(--surface,#fffdf7); color:var(--ink,#1c1a15); border:1px solid var(--hairline,#e5ddc9)}
 .mnap.bank .mme-exp{margin-top:8px; padding-top:8px; border-top:1px solid var(--hairline,#e5ddc9);
   font-size:13px}
@@ -297,18 +318,22 @@ a.mnap.pick:active{opacity:.92}
 .mbets[open]>summary{border-bottom:1px solid var(--hairline,#e5ddc9)}
 .mbets .mlights{padding:8px 12px 4px; margin-top:0}
 .mbets .mcum{margin:0; padding:8px 12px 10px; background:transparent; border:0; border-radius:0}
-.mnap .nt{font-size:13px; letter-spacing:.04em; opacity:.9; font-weight:700; line-height:1.3}
+.mcred-open .mlights{padding:4px 12px 8px; margin:0}
+.mnap .nt{font-size:13px; letter-spacing:.04em; opacity:.9; font-weight:700; line-height:1.3;
+  color:var(--color-racing-green,#2d5016)}
 .mnap .nh{font-size:20px; font-weight:700; margin:6px 0 4px; line-height:1.25; word-break:break-word}
 .mnap .nr{font-size:14px; opacity:.92; line-height:1.45}
 .mnap.bank .nt{opacity:.7; color:var(--ink-2,#55503f); margin:0}
 .mnap.bank .nr{opacity:1; font-size:14px; color:var(--ink,#1c1a15); line-height:1.5}
-.mnap .mres.potd-res{margin-top:10px; background:rgba(255,255,255,.08); border-color:rgba(243,237,218,.25); color:#f3edda}
-.mnap .mres.potd-res .ok{color:#7ddea8} .mnap .mres.potd-res .bad{color:#f0a090}
+.mnap .mres.potd-res{margin-top:10px; background:var(--surface,#fffdf7);
+  border-color:var(--hairline,#e5ddc9); color:var(--ink,#1c1a15)}
+.mnap .mres.potd-res .ok{color:var(--color-racing-green,#2d5016)}
+.mnap .mres.potd-res .bad{color:var(--color-racing-red,#8b0000)}
 .mpotd-stats{display:flex; flex-wrap:wrap; gap:10px 16px; margin-top:10px; padding-top:10px;
-  border-top:1px solid rgba(243,237,218,.18)}
+  border-top:1px solid var(--color-racing-green,#2d5016)}
 .mpotd-stats .msi{display:flex; align-items:baseline; gap:5px}
 .mpotd-stats .msi i{font-style:normal; font-size:10px; font-weight:700; letter-spacing:.04em;
-  text-transform:uppercase; opacity:.75}
+  text-transform:uppercase; opacity:.75; color:var(--color-racing-green,#2d5016)}
 .mpotd-stats .msi b{font-size:14px; font-weight:700; font-variant-numeric:tabular-nums}
 .mauto{padding:4px 14px 0; font-size:11px; color:var(--ink-3,#8a8272); text-align:center}
 .mauto b{color:var(--ink-2,#55503f); font-variant-numeric:tabular-nums}
@@ -443,9 +468,9 @@ a.mnap.pick:active{opacity:.92}
 .mentity-rank .nm{font-weight:750}.mentity-rank .record{color:var(--ink-3,#8a8272)}
 .mentity-rank .record b{color:var(--ink,#1c1a15)}
 .mentity-top .mstat-legs{gap:6px}
-.mcfg{margin:12px;padding:14px;background:var(--surface,#fffdf7);border-radius:14px;border:1px solid var(--hairline,#e5ddc9)}.mcfg-row{display:flex;justify-content:space-between;align-items:center;gap:12px;padding:10px 0;border-bottom:1px solid var(--hairline,#e5ddc9);font-size:14px}.mcfg-row input[type=number]{width:90px;padding:6px 8px;border-radius:8px;border:1px solid var(--hairline,#e5ddc9)}.mcfg-explain>span{display:flex;flex-direction:column;gap:2px}.mcfg-explain small{max-width:210px;color:var(--ink-3,#8a8272);line-height:1.25}.mcfg-explain>b{font-size:12.5px;text-align:right}.mcfg-more{margin:8px 0 14px}.mcfg-more>summary{cursor:pointer;font-weight:700;color:var(--brass,#a07d2a);padding:8px 0}.mimp{padding:9px 0;border-bottom:1px solid var(--hairline,#e5ddc9);font-size:13px;line-height:1.35}.mimp small{display:block;color:var(--ink-3,#8a8272);margin-top:3px}.mlog{margin:12px;padding:14px;background:var(--surface,#fffdf7);border-radius:14px;border:1px solid var(--hairline,#e5ddc9);font-size:12.5px;line-height:1.45;white-space:pre-wrap;overflow-x:auto}.mout{margin:8px 12px 0;padding:8px 12px;border-radius:10px;font-size:12.5px;background:#f8eee9;border:1px solid #e8c4b8;color:var(--ink-2,#55503f)}.mme{margin:10px 12px 0;padding:12px 14px;border-radius:14px;background:var(--surface,#fffdf7);border:1px solid var(--hairline,#e5ddc9)}.mme-h{font-size:13px;font-weight:700;margin-bottom:8px}.mme-row{font-size:13px;padding:4px 0}.mme-exp{margin-top:8px;font-size:13px}.mme-exp summary{font-weight:700;cursor:pointer;color:var(--brass,#a07d2a)}.mnap.bank .mme-exp{padding-top:4px;border-top:1px solid var(--hairline,#e5ddc9)}.ai-prompt{margin:8px 0;padding:10px;background:#fff;border:1px dashed var(--brass,#a07d2a);border-radius:10px}.ai-prompt summary{font-weight:700;font-size:13px;color:var(--brass,#a07d2a);cursor:pointer}</style></head><body class="mobile mday-config theme-light"><div class="mhead"><span class="t">Going</span><span class="d">Mon 20 Jul</span></div><main class="mlist">
+.mcfg{margin:12px;padding:14px;background:var(--surface,#fffdf7);border-radius:14px;border:1px solid var(--hairline,#e5ddc9)}.mcfg-row{display:flex;justify-content:space-between;align-items:center;gap:12px;padding:10px 0;border-bottom:1px solid var(--hairline,#e5ddc9);font-size:14px}.mcfg-row input[type=number]{width:90px;padding:6px 8px;border-radius:8px;border:1px solid var(--hairline,#e5ddc9)}.mcfg-explain>span{display:flex;flex-direction:column;gap:2px}.mcfg-explain small{max-width:210px;color:var(--ink-3,#8a8272);line-height:1.25}.mcfg-explain>b{font-size:12.5px;text-align:right}.mcfg-more{margin:8px 0 14px}.mcfg-more>summary{cursor:pointer;font-weight:700;color:var(--brass,#a07d2a);padding:8px 0}.mimp{padding:9px 0;border-bottom:1px solid var(--hairline,#e5ddc9);font-size:13px;line-height:1.35}.mimp small{display:block;color:var(--ink-3,#8a8272);margin-top:3px}.mlog{margin:12px;padding:14px;background:var(--surface,#fffdf7);border-radius:14px;border:1px solid var(--hairline,#e5ddc9);font-size:12.5px;line-height:1.45;white-space:pre-wrap;overflow-x:auto}.mout{margin:8px 12px 0;padding:8px 12px;border-radius:10px;font-size:12.5px;background:#f8eee9;border:1px solid #e8c4b8;color:var(--ink-2,#55503f)}.mme{margin:10px 12px 0;padding:12px 14px;border-radius:14px;background:var(--surface,#fffdf7);border:1px solid var(--hairline,#e5ddc9)}.mme-h{font-size:13px;font-weight:700;margin-bottom:8px}.mme-row{font-size:13px;padding:4px 0}.mme-exp{margin-top:8px;font-size:13px}.mme-exp summary{font-weight:700;cursor:pointer;color:var(--brass,#a07d2a)}.mnap.bank .mme-exp{padding-top:4px;border-top:1px solid var(--hairline,#e5ddc9)}.ai-prompt{margin:8px 0;padding:10px;background:#fff;border:1px dashed var(--brass,#a07d2a);border-radius:10px}.ai-prompt summary{font-weight:700;font-size:13px;color:var(--brass,#a07d2a);cursor:pointer}</style></head><body class="mobile mday-config theme-light"><div class="mhead"><span class="t">Going</span><span class="d">Mon 27 Jul</span></div><main class="mlist">
     <div class="mrole"><b>Config</b> — readonly · edit on the desktop Config page</div>
-    <div class="mout" role="status"><b>Outstanding · Today</b> — 17 races missing AI · Lucy 17 · overnight mop-up fills these</div><div class="mout" role="status"><b>Outstanding · Tomorrow</b> — 27 races missing AI · Lucy 27 · overnight mop-up fills these</div>
+    <div class="mout" role="status"><b>Outstanding · Today</b> — 25 races missing AI · Lucy 21 · overnight mop-up fills these</div>
     <div class="mcfg">
       <h3 class="msec">Notifications</h3>
       <p class="sub">Phone pushes that go out from Lucy (ntfy).</p>
@@ -457,8 +482,8 @@ a.mnap.pick:active{opacity:.92}
         <div class="mcfg-row"><span>Trainer / jockey</span><b>20</b></div><div class="mcfg-row"><span>Recent form</span><b>18</b></div><div class="mcfg-row"><span>Speed / rating</span><b>12</b></div><div class="mcfg-row"><span>Trainer form</span><b>11</b></div><div class="mcfg-row"><span>Jockey form</span><b>10</b></div><div class="mcfg-row"><span>Course &amp; distance</span><b>9</b></div><div class="mcfg-row"><span>Going</span><b>7</b></div><div class="mcfg-row"><span>Handicap mark</span><b>6</b></div><div class="mcfg-row"><span>Class move</span><b>5</b></div><div class="mcfg-row"><span>Fitness</span><b>5</b></div><div class="mcfg-row"><span>Pace / run style</span><b>4</b></div><div class="mcfg-row"><span>Draw</span><b>3</b></div><div class="mcfg-row"><span>Headgear</span><b>3</b></div></details>
       <h3 class="msec">Post-mortem improvements</h3>
       <p class="sub">Grounded proposals recorded by the overnight AI-learning pipeline.</p>
-      <div class="mimp"><div>jockey experience — python3 feature_eval.py --feature jockey_in_form</div><small>2026-07-20T00:01:14</small></div><div class="mimp"><div>risk: recent form inconsistency — python3 feature_eval.py --feature yard_in_form</div><small>2026-07-20T00:01:14</small></div><div class="mimp"><div>ground — python3 feature_eval.py --feature going_win_rate</div><small>2026-07-20T00:01:14</small></div><div class="mimp"><div>draw — python3 feature_eval.py --feature draw_bias</div><small>2026-07-20T00:01:14</small></div><div class="mimp"><div>going — python3 feature_eval.py --feature going_win_rate</div><small>2026-07-20T00:01:14</small></div><div class="mimp"><div>or</div><small>2026-07-20T00:01:14</small></div><div class="mimp"><div>jockey experience → candidate jockey_in_form</div><small>2026-07-20T00:01:14</small></div><div class="mimp"><div>risk: recent form inconsistency → candidate yard_in_form</div><small>2026-07-20T00:01:14</small></div><div class="mimp"><div>ground → candidate going_win_rate</div><small>2026-07-20T00:01:14</small></div><div class="mimp"><div>draw → candidate draw_bias</div><small>2026-07-20T00:01:14</small></div>
+      <div class="mimp"><div>jockey experience — python3 feature_eval.py --feature jockey_in_form</div><small>2026-07-27T00:00:47</small></div><div class="mimp"><div>or</div><small>2026-07-27T00:00:47</small></div><div class="mimp"><div>risk: recent form inconsistency — python3 feature_eval.py --feature yard_in_form</div><small>2026-07-27T00:00:47</small></div><div class="mimp"><div>draw — python3 feature_eval.py --feature draw_bias</div><small>2026-07-27T00:00:47</small></div><div class="mimp"><div>ground — python3 feature_eval.py --feature going_win_rate</div><small>2026-07-27T00:00:47</small></div><div class="mimp"><div>going — python3 feature_eval.py --feature going_win_rate</div><small>2026-07-27T00:00:47</small></div><div class="mimp"><div>jockey experience → candidate jockey_in_form</div><small>2026-07-27T00:00:47</small></div><div class="mimp"><div>risk: recent form inconsistency → candidate yard_in_form</div><small>2026-07-27T00:00:47</small></div><div class="mimp"><div>draw → candidate draw_bias</div><small>2026-07-27T00:00:47</small></div><div class="mimp"><div>ground → candidate going_win_rate</div><small>2026-07-27T00:00:47</small></div>
       <h3 class="msec">AI voices</h3>
       <p class="sub">AI voices for analysis, lights, and credits. Model is always on.</p>
-      <div class="mcfg-row"><span>Cursor</span><b style="color:#2f6b52">on</b></div><div class="mcfg-row"><span>NVIDIA</span><b style="color:#2f6b52">on</b></div><div class="mcfg-row"><span>Groq</span><b style="color:#2f6b52">on</b></div><div class="mcfg-row"><span>Cerebras</span><b style="color:#2f6b52">on</b></div><div class="mcfg-row"><span>Lucy (Ollama)</span><b style="color:#2f6b52">on</b></div><div class="mcfg-row"><span>Claude</span><span class="sub">off</span></div><div class="mcfg-row"><span>OpenAI</span><span class="sub">off</span></div>
-    </div></main><nav class="mnav" aria-label="Main"><a href="yesterday.html"><span class="ic" aria-hidden="true"><svg viewBox="0 0 24 24" focusable="false"><path d="M15 6l-6 6 6 6"/></svg></span><span class="lab">19 Jul</span></a><a href="index.html"><span class="ic" aria-hidden="true"><svg viewBox="0 0 24 24" focusable="false"><path d="M4 11.5L12 4l8 7.5"/><path d="M7 10.5V20h10v-9.5"/><path d="M10 20v-5h4v5"/></svg></span><span class="lab">20 Jul</span></a><a href="tomorrow.html"><span class="ic" aria-hidden="true"><svg viewBox="0 0 24 24" focusable="false"><path d="M9 6l6 6-6 6"/></svg></span><span class="lab">21 Jul</span></a></nav></body></html>
+      <div class="mcfg-row"><span>Cursor</span><b style="color:#2f6b52">on</b></div><div class="mcfg-row"><span>NVIDIA</span><b style="color:#2f6b52">on</b></div><div class="mcfg-row"><span>Groq</span><b style="color:#2f6b52">on</b></div><div class="mcfg-row"><span>Gemini</span><b style="color:#2f6b52">on</b></div><div class="mcfg-row"><span>Cerebras</span><b style="color:#2f6b52">on</b></div><div class="mcfg-row"><span>Lucy (Ollama)</span><b style="color:#2f6b52">on</b></div><div class="mcfg-row"><span>Claude</span><span class="sub">off</span></div><div class="mcfg-row"><span>OpenAI</span><span class="sub">off</span></div>
+    </div></main><nav class="mnav" aria-label="Main"><a href="yesterday.html"><span class="ic" aria-hidden="true"><svg viewBox="0 0 24 24" focusable="false"><path d="M15 6l-6 6 6 6"/></svg></span><span class="lab">26 Jul</span></a><a href="index.html"><span class="ic" aria-hidden="true"><svg viewBox="0 0 24 24" focusable="false"><path d="M4 11.5L12 4l8 7.5"/><path d="M7 10.5V20h10v-9.5"/><path d="M10 20v-5h4v5"/></svg></span><span class="lab">27 Jul</span></a><a href="tomorrow.html"><span class="ic" aria-hidden="true"><svg viewBox="0 0 24 24" focusable="false"><path d="M9 6l6 6-6 6"/></svg></span><span class="lab">28 Jul</span></a></nav></body></html>
