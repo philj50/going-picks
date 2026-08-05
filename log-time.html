@@ -311,7 +311,9 @@ a.mnap.pick:active{opacity:.92}
 .mnap.bank .mme-row{font-size:13px; padding:4px 0}
 .mnap.bank .mme-row.won{color:var(--turf,var(--color-racing-green,#2f6b52))}
 .mnap.bank .mme-row.lost{color:var(--clay,var(--color-racing-red,#a3452a))}
-.mnap.bank .mme-row.won .sub,.mnap.bank .mme-row.lost .sub{color:inherit}
+.mnap.bank .mme-row.placed{color:#8a6d1f}
+.mnap.bank .mme-row.won .sub,.mnap.bank .mme-row.lost .sub,
+.mnap.bank .mme-row.placed .sub{color:inherit}
 .mnap.bank .nt-row{display:flex; align-items:center; justify-content:space-between; gap:10px;
   margin-bottom:2px}
 .mnap.bank .bsort{display:flex; align-items:center; gap:6px; font-size:11px; font-weight:600;
@@ -411,6 +413,7 @@ a.mnap.pick:active{opacity:.92}
 .mstat-leg .s{color:var(--ink-3,#8a8272); font-size:11.5px}
 .mstat-leg .r{font-weight:700; font-variant-numeric:tabular-nums}
 .mstat-leg .r.won{color:#2f6b52}.mstat-leg .r.lost{color:#a3452a}
+.mstat-leg .r.placed{color:#8a6d1f}
 .mstat-leg .r.pending{color:var(--ink-3,#8a8272)}
 .mstat-more{margin-top:6px; border-radius:10px; background:var(--surface,#fffdf7);
   border:1px solid var(--hairline,#e5ddc9); overflow:hidden}
@@ -481,18 +484,26 @@ a.mnap.pick:active{opacity:.92}
 .mcfg{margin:12px;padding:14px;background:var(--surface,#fffdf7);border-radius:14px;border:1px solid var(--hairline,#e5ddc9)}.mcfg-row{display:flex;justify-content:space-between;align-items:center;gap:12px;padding:10px 0;border-bottom:1px solid var(--hairline,#e5ddc9);font-size:14px}.mcfg-row input[type=number]{width:90px;padding:6px 8px;border-radius:8px;border:1px solid var(--hairline,#e5ddc9)}.mcfg-explain>span{display:flex;flex-direction:column;gap:2px}.mcfg-explain small{max-width:210px;color:var(--ink-3,#8a8272);line-height:1.25}.mcfg-explain>b{font-size:12.5px;text-align:right}.mcfg-more{margin:8px 0 14px}.mcfg-more>summary{cursor:pointer;font-weight:700;color:var(--brass,#a07d2a);padding:8px 0}.mwbars{margin:4px 0 8px}.mwbar{display:grid;grid-template-columns:minmax(0,6.6rem) 1fr 3.4rem;gap:8px;align-items:center;margin:0 0 7px;font-size:12px}.mwbar>span{color:var(--ink-2,#55503f);line-height:1.2;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}.mwbar .wt{height:10px;background:var(--surface-2,#f2ecdb);border-radius:5px;overflow:hidden}.mwbar .wt i{display:block;height:100%;border-radius:5px;background:linear-gradient(90deg,var(--brass-dim,#8a6a22),var(--brass,#a07d2a))}.mwbar .wt i.dead{background:var(--ink-3,#8a8272);opacity:.4}.mwbar .wv{font-family:ui-monospace,SFMono-Regular,Menlo,monospace;font-size:11px;text-align:right;color:var(--ink-2,#55503f);font-variant-numeric:tabular-nums;white-space:nowrap}.mflow-card{margin:0 0 14px;padding:12px;border-radius:14px;background:linear-gradient(165deg,#fffdf7 0%,#f2ecdb 55%,#ebe3cf 100%);border:1px solid var(--brass,#a07d2a);box-shadow:0 8px 20px -14px rgba(160,125,42,.55)}.mflow-h{font-family:Georgia,serif;font-size:17px;font-weight:700;letter-spacing:-.02em;color:var(--ink,#1c1a15);margin:0 0 10px}.mflow{display:grid;grid-template-columns:1fr 1fr;gap:8px 10px;margin:0}.mflow-tile{display:flex;gap:8px;align-items:flex-start;padding:10px;background:var(--surface,#fffdf7);border:1px solid var(--hairline,#e5ddc9);border-radius:12px;min-height:4.6rem;box-shadow:0 1px 2px rgba(28,26,21,.04)}.mflow-n{flex:none;width:24px;height:24px;border-radius:8px;background:var(--brass,#a07d2a);color:#1a1407;font-size:12px;font-weight:800;display:flex;align-items:center;justify-content:center}.mflow-body b{display:block;font-size:13.5px;font-weight:750;margin:0 0 3px;color:var(--ink,#1c1a15)}.mflow-body small{display:block;font-size:11.5px;color:var(--ink-2,#55503f);line-height:1.35}.mflow-arrow{display:none}.mimp{padding:9px 0;border-bottom:1px solid var(--hairline,#e5ddc9);font-size:13px;line-height:1.35}.mimp small{display:block;color:var(--ink-3,#8a8272);margin-top:3px}.mlog{margin:12px;padding:14px;background:var(--surface,#fffdf7);border-radius:14px;border:1px solid var(--hairline,#e5ddc9);font-size:12.5px;line-height:1.45;white-space:pre-wrap;overflow-x:auto}.mout{margin:8px 12px 0;padding:8px 12px;border-radius:10px;font-size:12.5px;background:#f8eee9;border:1px solid #e8c4b8;color:var(--ink-2,#55503f)}.mme{margin:10px 12px 0;padding:12px 14px;border-radius:14px;background:var(--surface,#fffdf7);border:1px solid var(--hairline,#e5ddc9)}.mme-h{font-size:13px;font-weight:700;margin-bottom:8px}.mme-row{font-size:13px;padding:4px 0}.mme-exp{margin-top:8px;font-size:13px}.mme-exp summary{font-weight:700;cursor:pointer;color:var(--brass,#a07d2a)}.mnap.bank .mme-exp{padding-top:4px;border-top:1px solid var(--hairline,#e5ddc9)}.ai-prompt{margin:8px 0;padding:10px;background:#fff;border:1px dashed var(--brass,#a07d2a);border-radius:10px}.ai-prompt summary{font-weight:700;font-size:13px;color:var(--brass,#a07d2a);cursor:pointer}</style></head><body class="mobile mday-log theme-light"><div class="mhead"><span class="t">Going</span><span class="d">Wed 05 Aug</span></div><main class="mlist"><div class="mrole"><b>Day log</b> — what happened on 2026-08-05 · also used in AI briefs</div><pre class="mlog"># Going — 2026-08-05
 
 - Card races: **0** · AI report races: **33**
+- Pick of the day: **Buckland Belle** (Brighton 4:00)
 - Outstanding voices: **23 races** (cerebras×1, gemini×23, ollama×9)
 
+## Voice scoreboard (staked hit rate)
+- **Gemini**: 2/4 (50%)
+- **Lucy**: 2/5 (40%)
+- **NVIDIA**: 1/5 (20%)
+- **Model**: 1/5 (20%)
+- **Groq**: 1/5 (20%)
+- **Cursor**: 0/6 (0%)
+- **Cerebras**: 0/5 (0%)
+
 ## Credit bankrolls
-- **claude**: 1336cr
-- **openai**: 1260cr
-- **groq**: 621cr
-- **model**: 636cr
-- **nvidia**: 830cr
-- **cursor**: 768cr
-- **cerebras**: 1481cr
-- **ollama**: 1766cr
-- **gemini**: 766cr
+- **model**: 972cr
+- **cursor**: 906cr
+- **nvidia**: 992cr
+- **groq**: 974cr
+- **gemini**: 1067cr
+- **cerebras**: 933cr
+- **ollama**: 1074cr
 
 ## Me bets (paper)
 - £20 **Tallahassee Lassie** (Kempton (AW) 5:20) · paper
@@ -500,36 +511,36 @@ a.mnap.pick:active{opacity:.92}
 
 ## Races
 - **Brighton 2:30** — Jenningsbet Over 200 Shops Nationwide Handicap Stakes: model **Cape Toronada** (cursor, nvidia, groq, gemini, cerebras, ollama)
-- **Brighton 3:00** — Jenningsbet In Deal Classified Stakes: model **River Wharfe** (cursor, nvidia, groq, gemini, cerebras, ollama) · stakes: gemini 17cr→Rainbow Sign, ollama 70cr→Aspire To Glory, model 12cr→River Wharfe
-- **Brighton 3:30** — Sapporo Japanese Premium Lager Brighton Mile Challenge Handicap Stakes (For The Brighton Mile Challenge Trophy): model **Sea Suite** (cursor, nvidia, groq, gemini, cerebras, ollama) · stakes: nvidia 10cr→Sea Suite, gemini 30cr→Sea Suite, cerebras 64cr→Newfangled, model 15cr→Sea Suite
+- **Brighton 3:00** — Jenningsbet In Deal Classified Stakes: model **River Wharfe** (cursor, nvidia, groq, gemini, cerebras, ollama) · stakes: cursor 10cr→Rainbow Sign, groq 5cr→Rainbow Sign, gemini 19cr→Rainbow Sign, ollama 10cr→Aspire To Glory
+- **Brighton 3:30** — Sapporo Japanese Premium Lager Brighton Mile Challenge Handicap Stakes (For The Brighton Mile Challenge Trophy): model **Sea Suite** (cursor, nvidia, groq, gemini, cerebras, ollama) · stakes: nvidia 10cr→Sea Suite, gemini 15cr→Sea Suite, cerebras 13cr→Newfangled, ollama 12cr→Sea Suite, model 13cr→Sea Suite
 - **Brighton 4:00** — Monty Bennetts 18th Birthday Handicap Stakes: model **Buckland Belle** (cursor, nvidia, groq, gemini, cerebras, ollama)
-- **Brighton 4:30** — Jenningsbet &quot;we Love Brighton Racecourse&quot; &#x27;confined&#x27; Handicap Stakes (For Horses Which Have Not Won A Race In 2026): model **—** (cursor, nvidia, groq, gemini, cerebras, ollama)
+- **Brighton 4:30** — Jenningsbet &quot;we Love Brighton Racecourse&quot; &#x27;confined&#x27; Handicap Stakes (For Horses Which Have Not Won A Race In 2026): model **—** (cursor, nvidia, groq, gemini, cerebras, ollama) · stakes: ollama 13cr→Viking Glory
 - **Brighton 5:00** — Free Race Replays On Attheraces.com Handicap Stakes (Brighton Summer Sprint Series Qualifier): model **Pop Dancer** (cursor, nvidia, groq, gemini, cerebras, ollama)
-- **Kempton (AW) 5:20** — Try Unibet&#x27;s New Improved Acca Boosts Nursery Handicap Stakes: model **Tallahassee Lassie** (cursor, nvidia, groq, gemini, cerebras, ollama)
+- **Kempton (AW) 5:20** — Try Unibet&#x27;s New Improved Acca Boosts Nursery Handicap Stakes: model **Tallahassee Lassie** (cursor, nvidia, groq, gemini, cerebras, ollama) · stakes: nvidia 5cr→Tallahassee Lassie, groq 5cr→Tallahassee Lassie, gemini 8cr→Tallahassee Lassie, ollama 14cr→Tallahassee Lassie, model 11cr→Tallahassee Lassie
 - **Kempton (AW) 5:50** — Unibet/British Stallion Studs EBF Novice Stakes (Div I) (GBB Race): model **—** (cursor, nvidia, groq, gemini, cerebras, ollama)
 - **Kempton (AW) 6:20** — Unibet/British Stallion Studs EBF Novice Stakes (Div II) (GBB Race): model **—** (cursor, nvidia, groq, gemini, cerebras, ollama)
-- **Kempton (AW) 6:50** — Unibet 3 Uniboosts A Day Novice Stakes (GBB Race): model **Gavriel** (cursor, nvidia, groq, gemini?, cerebras, ollama) · stakes: ollama 61cr→Gavriel, model 12cr→Gavriel
-- **Kempton (AW) 7:20** — Becky Burke Memorial Novice Stakes (Div I) (GBB/GBBPlus Race): model **—** (cursor, nvidia, groq, gemini, cerebras, ollama) · stakes: cursor 15cr→Centrum, nvidia 5cr→Centrum, gemini 13cr→Fortitudine, cerebras 98cr→Be Hopeful
+- **Kempton (AW) 6:50** — Unibet 3 Uniboosts A Day Novice Stakes (GBB Race): model **Gavriel** (cursor, nvidia, groq, gemini?, cerebras, ollama) · stakes: model 11cr→Gavriel
+- **Kempton (AW) 7:20** — Becky Burke Memorial Novice Stakes (Div I) (GBB/GBBPlus Race): model **—** (cursor, nvidia, groq, gemini, cerebras, ollama) · stakes: cursor 18cr→Centrum, groq 5cr→Fortitudine, gemini 13cr→Fortitudine
 - **Kempton (AW) 7:50** — Becky Burke Memorial Novice Stakes (Div II) (gbb/gbbplus Race): model **—** (cursor, nvidia, groq, gemini?, cerebras, ollama)
-- **Kempton (AW) 8:20** — Unibet Supporting Safer Gambling Handicap Stakes: model **Piscean Star** (cursor, nvidia, groq, gemini?, cerebras, ollama) · stakes: cursor 15cr→Piscean Star, nvidia 10cr→Piscean Star, groq 30cr→Piscean Star, cerebras 93cr→Piscean Star, model 16cr→Piscean Star
+- **Kempton (AW) 8:20** — Unibet Supporting Safer Gambling Handicap Stakes: model **Piscean Star** (cursor, nvidia, groq, gemini?, cerebras, ollama) · stakes: cursor 12cr→Piscean Star, nvidia 10cr→Piscean Star, groq 5cr→Piscean Star, cerebras 18cr→Piscean Star, ollama 15cr→Piscean Star, model 17cr→Piscean Star
 - **Kempton (AW) 8:50** — Unibet More Extra Place Races Handicap Stakes (London Stayers&#x27; Series Qualifier): model **—** (cursor, nvidia, groq, gemini?, cerebras, ollama)
-- **Pontefract 2:45** — Honda Wakefield Super-n Amateur Jockeys&#x27; Handicap Stakes: model **—** (cursor, nvidia, groq, gemini?, cerebras, ollama) · stakes: groq 7cr→Star Start
-- **Pontefract 3:15** — Jayne - On Course Lady Bookmaker Ebf Maiden Stakes (gbb Race): model **—** (cursor, nvidia, groq, gemini?, cerebras, ollama) · stakes: ollama 35cr→Rock Steady Beat
+- **Pontefract 2:45** — Honda Wakefield Super-n Amateur Jockeys&#x27; Handicap Stakes: model **—** (cursor, nvidia, groq, gemini?, cerebras, ollama)
+- **Pontefract 3:15** — Jayne - On Course Lady Bookmaker Ebf Maiden Stakes (gbb Race): model **—** (cursor, nvidia, groq, gemini?, cerebras, ollama)
 - **Pontefract 3:45** — Riu Hotels And Resorts Ladies Day Veterans&#x27; Handicap Stakes: model **Garden Oasis** (cursor, nvidia, groq, gemini?, cerebras, ollama)
-- **Pontefract 4:15** — Fbs Chartered Accountants Chaplins Club Handicap Stakes: model **—** (cursor, nvidia, groq, gemini?, cerebras, ollama) · stakes: groq 15cr→Betweenthesticks, cerebras 62cr→Sea Her Excel, ollama 61cr→Spirit Of Applause
-- **Pontefract 4:45** — Bet With Jayne - Your Local Bookmaker Handicap Stakes: model **—** (cursor, nvidia, groq, gemini?, cerebras, ollama) · stakes: nvidia 10cr→The Good Biscuit, groq 15cr→The Good Biscuit
-- **Pontefract 5:15** — Napoleons Casino Bradford Handicap Stakes (gbbplus Race): model **—** (cursor, nvidia, groq, gemini?, cerebras, ollama) · stakes: cursor 20cr→Anzac Day
-- **Yarmouth 5:40** — Gold &amp; Silver Exchange Amateur Jockeys&#x27; Handicap Stakes: model **—** (cursor, nvidia, groq, gemini?, cerebras, ollama) · stakes: cerebras 141cr→Alafdhal
+- **Pontefract 4:15** — Fbs Chartered Accountants Chaplins Club Handicap Stakes: model **—** (cursor, nvidia, groq, gemini?, cerebras, ollama) · stakes: cerebras 13cr→Sea Her Excel
+- **Pontefract 4:45** — Bet With Jayne - Your Local Bookmaker Handicap Stakes: model **—** (cursor, nvidia, groq, gemini?, cerebras, ollama)
+- **Pontefract 5:15** — Napoleons Casino Bradford Handicap Stakes (gbbplus Race): model **—** (cursor, nvidia, groq, gemini?, cerebras, ollama) · stakes: cursor 15cr→Anzac Day
+- **Yarmouth 5:40** — Gold &amp; Silver Exchange Amateur Jockeys&#x27; Handicap Stakes: model **—** (cursor, nvidia, groq, gemini?, cerebras, ollama) · stakes: cerebras 23cr→Alafdhal
 - **Yarmouth 6:10** — British Stallion Studs Ebf Maiden Fillies&#x27; Stakes (gbb Race): model **—** (cursor, nvidia, groq, gemini?, cerebras)
-- **Yarmouth 6:40** — Strawberry Fields Stud Nursery Handicap Stakes: model **Dubai Charm** (cursor, nvidia, groq, gemini?, cerebras, ollama) · stakes: groq 12cr→Dubai Charm, model 12cr→Dubai Charm
-- **Yarmouth 7:10** — Origin Amenity Solutions Restricted Novice Stakes (For Horses In Bands C And D) (GBB Race): model **—** (cursor, nvidia, groq, gemini?, cerebras, ollama) · stakes: nvidia 10cr→Time Thief
+- **Yarmouth 6:40** — Strawberry Fields Stud Nursery Handicap Stakes: model **Dubai Charm** (cursor, nvidia, groq, gemini?, cerebras, ollama) · stakes: nvidia 10cr→Dubai Charm, model 13cr→Dubai Charm
+- **Yarmouth 7:10** — Origin Amenity Solutions Restricted Novice Stakes (For Horses In Bands C And D) (GBB Race): model **—** (cursor, nvidia, groq, gemini?, cerebras, ollama)
 - **Yarmouth 7:40** — Brandfords Restaurant &amp; Bars Handicap Stakes: model **—** (cursor, nvidia, groq, gemini?, cerebras, ollama)
-- **Yarmouth 8:10** — Bet Central Classified Stakes: model **—** (cursor, nvidia, groq, gemini?, cerebras, ollama?)
+- **Yarmouth 8:10** — Bet Central Classified Stakes: model **—** (cursor, nvidia, groq, gemini?, cerebras, ollama?) · stakes: cerebras 13cr→Chiedozie
 - **Sligo 5:30** — Carlsberg Optional Claiming Race: model **—** (cursor, nvidia, groq, gemini?, cerebras, ollama?)
-- **Sligo 6:00** — Irish Stallion Farms EBF Connacht Oaks Fillies Handicap: model **—** (cursor, nvidia, groq, gemini?, cerebras, ollama?)
+- **Sligo 6:00** — Irish Stallion Farms EBF Connacht Oaks Fillies Handicap: model **—** (cursor, nvidia, groq, gemini?, cerebras, ollama?) · stakes: nvidia 5cr→Alice Monet
 - **Sligo 6:30** — Irish EBF Auction Series Maiden: model **—** (cursor, nvidia, groq, gemini?, cerebras, ollama?)
-- **Sligo 7:00** — John Gilligan Memorial Nursery Handicap: model **Hi Corbett Court** (cursor, nvidia, groq, gemini?, cerebras, ollama?) · stakes: cursor 5cr→Woodlawn Lily
-- **Sligo 7:30** — Baader - Eddie Carr PBR 2000 Handicap: model **—** (cursor, nvidia, groq, gemini?, cerebras?, ollama?)
-- **Sligo 8:00** — Guinness Handicap: model **Chicago Moon** (cursor, nvidia, groq, gemini?, cerebras, ollama?)
+- **Sligo 7:00** — John Gilligan Memorial Nursery Handicap: model **Hi Corbett Court** (cursor, nvidia, groq, gemini?, cerebras, ollama?) · stakes: cursor 8cr→Woodlawn Lily
+- **Sligo 7:30** — Baader - Eddie Carr PBR 2000 Handicap: model **—** (cursor, nvidia, groq, gemini?, cerebras?, ollama?) · stakes: groq 5cr→Glen Breeze
+- **Sligo 8:00** — Guinness Handicap: model **Chicago Moon** (cursor, nvidia, groq, gemini?, cerebras, ollama?) · stakes: cursor 10cr→Queen Of Astolat
 - **Sligo 8:30** — Rockshore Cider Handicap: model **—** (cursor, nvidia, groq, gemini?, cerebras, ollama?)
 </pre></main><nav class="mnav" aria-label="Main"><a href="yesterday.html"><span class="ic" aria-hidden="true"><svg viewBox="0 0 24 24" focusable="false"><path d="M15 6l-6 6 6 6"/></svg></span><span class="lab">04 Aug</span></a><a href="index.html"><span class="ic" aria-hidden="true"><svg viewBox="0 0 24 24" focusable="false"><path d="M4 11.5L12 4l8 7.5"/><path d="M7 10.5V20h10v-9.5"/><path d="M10 20v-5h4v5"/></svg></span><span class="lab">05 Aug</span></a><a href="tomorrow.html"><span class="ic" aria-hidden="true"><svg viewBox="0 0 24 24" focusable="false"><path d="M9 6l6 6-6 6"/></svg></span><span class="lab">06 Aug</span></a></nav></body></html>
