@@ -303,6 +303,14 @@ a.mnap.pick:active{opacity:.92}
 .mnap.pick .nto{font-size:12px; opacity:.8; margin-top:8px; font-weight:600;
   color:var(--color-racing-green,#2d5016)}
 .mnap.bank{background:var(--surface,#fffdf7); color:var(--ink,#1c1a15); border:1px solid var(--hairline,#e5ddc9)}
+.mnap.bank>summary.mbank-sum{list-style:none; cursor:pointer; display:flex; align-items:center;
+  justify-content:space-between; gap:10px; margin:0}
+.mnap.bank>summary.mbank-sum::-webkit-details-marker{display:none}
+.mnap.bank>summary.mbank-sum .nt{margin:0}
+.mnap.bank>summary.mbank-sum .mbank-hint{font-size:11px; font-weight:600; color:var(--ink-3,#8a8272);
+  letter-spacing:.02em; white-space:nowrap}
+.mnap.bank[open]>summary.mbank-sum{margin-bottom:8px; padding-bottom:8px;
+  border-bottom:1px solid var(--hairline,#e5ddc9)}
 .mnap.bank .mme-exp{margin-top:8px; padding-top:8px; border-top:1px solid var(--hairline,#e5ddc9);
   font-size:13px}
 .mnap.bank .mme-exp.voice:first-of-type{margin-top:6px; padding-top:4px; border-top:0}
@@ -322,6 +330,33 @@ a.mnap.pick:active{opacity:.92}
   border:1px solid var(--hairline,#e5ddc9); border-radius:8px; padding:4px 6px;
   background:var(--surface-2,#f2ecdb); max-width:9.5rem}
 .mnap.bank .mme-exp.voice summary .sub{font-weight:500; color:var(--ink-3,#8a8272)}
+.mnap.topbets{background:var(--surface,#fffdf7); color:var(--ink,#1c1a15);
+  border:1px solid var(--brass,#a07d2a)}
+.mnap.topbets>summary.mtop-sum{list-style:none; cursor:pointer; display:flex; align-items:center;
+  justify-content:space-between; gap:10px; margin:0}
+.mnap.topbets>summary.mtop-sum::-webkit-details-marker{display:none}
+.mnap.topbets>summary.mtop-sum .nt{margin:0; color:var(--brass,#a07d2a)}
+.mnap.topbets>summary.mtop-sum .mtop-hint{font-size:11px; font-weight:600; color:var(--ink-3,#8a8272);
+  letter-spacing:.02em; white-space:nowrap}
+.mnap.topbets[open]>summary.mtop-sum{margin-bottom:8px; padding-bottom:8px;
+  border-bottom:1px solid var(--hairline,#e5ddc9)}
+.mnap.topbets .nt{color:var(--brass,#a07d2a)}
+.mnap.topbets .mtop3{margin:8px 0 0; padding:0; list-style:none; counter-reset:topb}
+.mnap.topbets .mtop3 li{display:flex; gap:10px; align-items:flex-start; padding:8px 0;
+  border-top:1px solid var(--hairline,#e5ddc9); font-size:14px; line-height:1.35}
+.mnap.topbets .mtop3 li:first-child{border-top:0; padding-top:4px}
+.mnap.topbets .mtop3 li::before{counter-increment:topb; content:counter(topb);
+  flex:0 0 1.4rem; font-weight:800; color:var(--brass,#a07d2a); font-variant-numeric:tabular-nums}
+.mnap.topbets .mtop3 .mh{font-weight:700; color:var(--ink,#1c1a15)}
+.mnap.topbets .mtop3 .msub{display:block; margin-top:2px; font-size:12.5px; color:var(--ink-2,#55503f)}
+.mnap.topbets .mmulti{margin-top:10px; padding-top:10px; border-top:1px solid var(--hairline,#e5ddc9)}
+.mnap.topbets .mmulti .nt{font-size:12px; margin-bottom:6px}
+.mnap.topbets .mmulti .mleg{font-size:13.5px; padding:3px 0; line-height:1.35}
+.mnap.topbets .mmulti .mleg b{font-weight:700}
+.mnap.topbets .mmulti .mcomb{margin-top:6px; font-size:12.5px; color:var(--ink-2,#55503f)}
+.mnap.topbets .mmulti .mcomb b{color:var(--ink,#1c1a15); font-variant-numeric:tabular-nums}
+.mnap.topbets .mmulti-empty{margin-top:10px; padding-top:10px; border-top:1px solid var(--hairline,#e5ddc9);
+  font-size:12.5px; color:var(--ink-3,#8a8272)}
 .mbets{margin:8px 14px 10px; padding:0; border-radius:10px; background:var(--surface-2,#f2ecdb);
   border:1px solid var(--hairline,#e5ddc9); font-size:13px}
 .mbets>summary{padding:10px 12px; font-weight:700; cursor:pointer; color:var(--brass,#a07d2a);
@@ -414,6 +449,7 @@ a.mnap.pick:active{opacity:.92}
 .mstat-leg .r{font-weight:700; font-variant-numeric:tabular-nums}
 .mstat-leg .r.won{color:#2f6b52}.mstat-leg .r.lost{color:#a3452a}
 .mstat-leg .r.placed{color:#8a6d1f}
+.mstat-leg .r.void{color:var(--ink-3,#8a8272)}
 .mstat-leg .r.pending{color:var(--ink-3,#8a8272)}
 .mstat-more{margin-top:6px; border-radius:10px; background:var(--surface,#fffdf7);
   border:1px solid var(--hairline,#e5ddc9); overflow:hidden}
@@ -481,55 +517,50 @@ a.mnap.pick:active{opacity:.92}
 .mentity-rank .nm{font-weight:750}.mentity-rank .record{color:var(--ink-3,#8a8272)}
 .mentity-rank .record b{color:var(--ink,#1c1a15)}
 .mentity-top .mstat-legs{gap:6px}
-.mcfg{margin:12px;padding:14px;background:var(--surface,#fffdf7);border-radius:14px;border:1px solid var(--hairline,#e5ddc9)}.mcfg-row{display:flex;justify-content:space-between;align-items:center;gap:12px;padding:10px 0;border-bottom:1px solid var(--hairline,#e5ddc9);font-size:14px}.mcfg-row input[type=number]{width:90px;padding:6px 8px;border-radius:8px;border:1px solid var(--hairline,#e5ddc9)}.mcfg-explain>span{display:flex;flex-direction:column;gap:2px}.mcfg-explain small{max-width:210px;color:var(--ink-3,#8a8272);line-height:1.25}.mcfg-explain>b{font-size:12.5px;text-align:right}.mcfg-more{margin:8px 0 14px}.mcfg-more>summary{cursor:pointer;font-weight:700;color:var(--brass,#a07d2a);padding:8px 0}.mwbars{margin:4px 0 8px}.mwbar{display:grid;grid-template-columns:minmax(0,6.6rem) 1fr 3.4rem;gap:8px;align-items:center;margin:0 0 7px;font-size:12px}.mwbar>span{color:var(--ink-2,#55503f);line-height:1.2;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}.mwbar .wt{height:10px;background:var(--surface-2,#f2ecdb);border-radius:5px;overflow:hidden}.mwbar .wt i{display:block;height:100%;border-radius:5px;background:linear-gradient(90deg,var(--brass-dim,#8a6a22),var(--brass,#a07d2a))}.mwbar .wt i.dead{background:var(--ink-3,#8a8272);opacity:.4}.mwbar .wv{font-family:ui-monospace,SFMono-Regular,Menlo,monospace;font-size:11px;text-align:right;color:var(--ink-2,#55503f);font-variant-numeric:tabular-nums;white-space:nowrap}.mflow-card{margin:0 0 14px;padding:12px;border-radius:14px;background:linear-gradient(165deg,#fffdf7 0%,#f2ecdb 55%,#ebe3cf 100%);border:1px solid var(--brass,#a07d2a);box-shadow:0 8px 20px -14px rgba(160,125,42,.55)}.mflow-h{font-family:Georgia,serif;font-size:17px;font-weight:700;letter-spacing:-.02em;color:var(--ink,#1c1a15);margin:0 0 10px}.mflow{display:grid;grid-template-columns:1fr 1fr;gap:8px 10px;margin:0}.mflow-tile{display:flex;gap:8px;align-items:flex-start;padding:10px;background:var(--surface,#fffdf7);border:1px solid var(--hairline,#e5ddc9);border-radius:12px;min-height:4.6rem;box-shadow:0 1px 2px rgba(28,26,21,.04)}.mflow-n{flex:none;width:24px;height:24px;border-radius:8px;background:var(--brass,#a07d2a);color:#1a1407;font-size:12px;font-weight:800;display:flex;align-items:center;justify-content:center}.mflow-body b{display:block;font-size:13.5px;font-weight:750;margin:0 0 3px;color:var(--ink,#1c1a15)}.mflow-body small{display:block;font-size:11.5px;color:var(--ink-2,#55503f);line-height:1.35}.mflow-arrow{display:none}.mimp{padding:9px 0;border-bottom:1px solid var(--hairline,#e5ddc9);font-size:13px;line-height:1.35}.mimp small{display:block;color:var(--ink-3,#8a8272);margin-top:3px}.mlog{margin:12px;padding:14px;background:var(--surface,#fffdf7);border-radius:14px;border:1px solid var(--hairline,#e5ddc9);font-size:12.5px;line-height:1.45;white-space:pre-wrap;overflow-x:auto}.mout{margin:8px 12px 0;padding:8px 12px;border-radius:10px;font-size:12.5px;background:#f8eee9;border:1px solid #e8c4b8;color:var(--ink-2,#55503f)}.mme{margin:10px 12px 0;padding:12px 14px;border-radius:14px;background:var(--surface,#fffdf7);border:1px solid var(--hairline,#e5ddc9)}.mme-h{font-size:13px;font-weight:700;margin-bottom:8px}.mme-row{font-size:13px;padding:4px 0}.mme-exp{margin-top:8px;font-size:13px}.mme-exp summary{font-weight:700;cursor:pointer;color:var(--brass,#a07d2a)}.mnap.bank .mme-exp{padding-top:4px;border-top:1px solid var(--hairline,#e5ddc9)}.ai-prompt{margin:8px 0;padding:10px;background:#fff;border:1px dashed var(--brass,#a07d2a);border-radius:10px}.ai-prompt summary{font-weight:700;font-size:13px;color:var(--brass,#a07d2a);cursor:pointer}</style></head><body class="mobile mday-log theme-light"><div class="mhead"><span class="t">Going</span><span class="d">Wed 12 Aug</span></div><main class="mlist"><div class="mrole"><b>Day log</b> — what happened on 2026-08-12 · also used in AI briefs</div><pre class="mlog"># Going — 2026-08-12
+.mcfg{margin:12px;padding:14px;background:var(--surface,#fffdf7);border-radius:14px;border:1px solid var(--hairline,#e5ddc9)}.mcfg-row{display:flex;justify-content:space-between;align-items:center;gap:12px;padding:10px 0;border-bottom:1px solid var(--hairline,#e5ddc9);font-size:14px}.mcfg-row input[type=number]{width:90px;padding:6px 8px;border-radius:8px;border:1px solid var(--hairline,#e5ddc9)}.mcfg-explain>span{display:flex;flex-direction:column;gap:2px}.mcfg-explain small{max-width:210px;color:var(--ink-3,#8a8272);line-height:1.25}.mcfg-explain>b{font-size:12.5px;text-align:right}.mcfg-more{margin:8px 0 14px}.mcfg-more>summary{cursor:pointer;font-weight:700;color:var(--brass,#a07d2a);padding:8px 0}.mwbars{margin:4px 0 8px}.mwbar{display:grid;grid-template-columns:minmax(0,6.6rem) 1fr 3.4rem;gap:8px;align-items:center;margin:0 0 7px;font-size:12px}.mwbar>span{color:var(--ink-2,#55503f);line-height:1.2;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}.mwbar .wt{height:10px;background:var(--surface-2,#f2ecdb);border-radius:5px;overflow:hidden}.mwbar .wt i{display:block;height:100%;border-radius:5px;background:linear-gradient(90deg,var(--brass-dim,#8a6a22),var(--brass,#a07d2a))}.mwbar .wt i.dead{background:var(--ink-3,#8a8272);opacity:.4}.mwbar .wv{font-family:ui-monospace,SFMono-Regular,Menlo,monospace;font-size:11px;text-align:right;color:var(--ink-2,#55503f);font-variant-numeric:tabular-nums;white-space:nowrap}.mflow-card{margin:0 0 14px;padding:12px;border-radius:14px;background:linear-gradient(165deg,#fffdf7 0%,#f2ecdb 55%,#ebe3cf 100%);border:1px solid var(--brass,#a07d2a);box-shadow:0 8px 20px -14px rgba(160,125,42,.55)}.mflow-h{font-family:Georgia,serif;font-size:17px;font-weight:700;letter-spacing:-.02em;color:var(--ink,#1c1a15);margin:0 0 10px}.mflow{display:grid;grid-template-columns:1fr 1fr;gap:8px 10px;margin:0}.mflow-tile{display:flex;gap:8px;align-items:flex-start;padding:10px;background:var(--surface,#fffdf7);border:1px solid var(--hairline,#e5ddc9);border-radius:12px;min-height:4.6rem;box-shadow:0 1px 2px rgba(28,26,21,.04)}.mflow-n{flex:none;width:24px;height:24px;border-radius:8px;background:var(--brass,#a07d2a);color:#1a1407;font-size:12px;font-weight:800;display:flex;align-items:center;justify-content:center}.mflow-body b{display:block;font-size:13.5px;font-weight:750;margin:0 0 3px;color:var(--ink,#1c1a15)}.mflow-body small{display:block;font-size:11.5px;color:var(--ink-2,#55503f);line-height:1.35}.mflow-arrow{display:none}.mimp{padding:9px 0;border-bottom:1px solid var(--hairline,#e5ddc9);font-size:13px;line-height:1.35}.mimp small{display:block;color:var(--ink-3,#8a8272);margin-top:3px}.mlog{margin:12px;padding:14px;background:var(--surface,#fffdf7);border-radius:14px;border:1px solid var(--hairline,#e5ddc9);font-size:12.5px;line-height:1.45;white-space:pre-wrap;overflow-x:auto}.mout{margin:8px 12px 0;padding:8px 12px;border-radius:10px;font-size:12.5px;background:#f8eee9;border:1px solid #e8c4b8;color:var(--ink-2,#55503f)}.mme{margin:10px 12px 0;padding:12px 14px;border-radius:14px;background:var(--surface,#fffdf7);border:1px solid var(--hairline,#e5ddc9)}.mme-h{font-size:13px;font-weight:700;margin-bottom:8px}.mme-row{font-size:13px;padding:4px 0}.mme-exp{margin-top:8px;font-size:13px}.mme-exp summary{font-weight:700;cursor:pointer;color:var(--brass,#a07d2a)}.mnap.bank .mme-exp{padding-top:4px;border-top:1px solid var(--hairline,#e5ddc9)}.ai-prompt{margin:8px 0;padding:10px;background:#fff;border:1px dashed var(--brass,#a07d2a);border-radius:10px}.ai-prompt summary{font-weight:700;font-size:13px;color:var(--brass,#a07d2a);cursor:pointer}</style></head><body class="mobile mday-log theme-light"><div class="mhead"><span class="t">Going</span><span class="d">Thu 13 Aug</span></div><main class="mlist"><div class="mrole"><b>Day log</b> — what happened on 2026-08-13 · also used in AI briefs</div><pre class="mlog"># Going — 2026-08-13
 
-- Card races: **0** · AI report races: **22**
-- Outstanding voices: **16 races** (gemini×16, groq×3, ollama×2)
+- Card races: **0** · AI report races: **19**
+- Outstanding voices: **9 races** (gemini×9, groq×4, ollama×3)
 
 ## Voice scoreboard (staked hit rate)
-- **Lucy**: 3/5 (60%)
-- **NVIDIA**: 2/3 (67%)
-- **Gemini**: 2/4 (50%)
-- **Groq**: 2/4 (50%)
-- **Model**: 1/2 (50%)
-- **Cerebras**: 1/4 (25%)
-- **Cursor**: 1/4 (25%)
+- **Model**: 2/3 (67%)
+- **Cerebras**: 1/1 (100%)
+- **NVIDIA**: 1/2 (50%)
+- **Cursor**: 1/3 (33%)
+- **Groq**: 1/3 (33%)
+- **Gemini**: 0/3 (0%)
+- **Lucy**: 0/2 (0%)
 
 ## Credit bankrolls
-- **model**: 1019cr
-- **cursor**: 904cr
-- **nvidia**: 1004cr
+- **model**: 1092cr
+- **cursor**: 988cr
+- **nvidia**: 1079cr
 - **groq**: 915cr
 - **gemini**: 1047cr
-- **cerebras**: 1031cr
+- **cerebras**: 1232cr
 - **ollama**: 1170cr
 
 ## Me bets (paper)
-- £11 **Ciao Capo** (Beverley 4:15) · paper
-- £10 **Remi Mae** (Salisbury 4:00) · paper
-- £9 **Miss Scott** (Salisbury 4:30) · paper
+- £10 **Beelzebub** (Windsor 6:11) · settled
 
 ## Races
-- **Beverley 2:15** — Macan At Porsche Centre Hull EBF Restricted Novice Stakes (For Horses In Bands C And D) (EBF Restricted Race Qualifier) (GBB Race): model **—** (cursor, nvidia, groq, gemini, cerebras, ollama) · stakes: cursor 12cr→Scottys Rocket, nvidia 5cr→Lexington Boom, gemini 25cr→Ard As A Rock, cerebras 21cr→Scottys Rocket
-- **Beverley 2:45** — 911 At Porsche Centre Hull EBF Restricted Maiden Stakes (For Horses In Bands B, C And D) (EBF Restricted Race Qualifier) (GBB Race): model **—** (cursor, nvidia, groq, gemini, cerebras, ollama)
-- **Beverley 3:15** — Clearanswer Call Centres Handicap Stakes: model **—** (cursor, nvidia, groq, gemini, cerebras, ollama) · stakes: groq 6cr→King Sharja, cerebras 16cr→Sir David, ollama 31cr→Sir David
-- **Beverley 3:45** — Jill Willows Handicap Stakes: model **Glenfinnan** (cursor, nvidia, groq, gemini, cerebras, ollama) · stakes: cursor 5cr→Tattie Bogle, nvidia 10cr→Glenfinnan, groq 12cr→Glenfinnan, gemini 21cr→Glenfinnan, model 14cr→Glenfinnan
-- **Beverley 4:15** — Cayenne Electric At Porsche Centre Hull Handicap Stakes: model **Ciao Capo** (cursor, nvidia, groq, gemini, cerebras, ollama) · stakes: gemini 19cr→Ciao Capo, ollama 19cr→Ciao Capo
-- **Beverley 4:45** — Nation Radio Yorkshire Handicap Stakes: model **—** (cursor, nvidia, groq, gemini?, cerebras, ollama) · stakes: ollama 19cr→Angel Numbers
-- **Ffos Las 3:37** — Faucets The Bathroom Specialists Maiden Fillies&#x27; Stakes (GBB Race): model **—** (cursor, nvidia, groq, gemini?, cerebras, ollama)
-- **Ffos Las 4:07** — Birthday Boy Leighton Happy 80th Handicap Stakes: model **—** (cursor, nvidia, groq, gemini, cerebras, ollama) · stakes: cursor 12cr→Happier, groq 8cr→Happier, gemini 29cr→Miracleoftheandes, cerebras 9cr→Portacloy
-- **Ffos Las 4:37** — Meyer Timber EBF Maiden Stakes (GBB Race): model **—** (cursor, nvidia, groq, gemini?, cerebras, ollama) · stakes: cursor 8cr→Isabella De Vega, ollama 19cr→Narrjoo
-- **Ffos Las 5:10** — Dandara Homes Handicap Stakes: model **—** (cursor, nvidia, groq, gemini?, cerebras, ollama)
-- **Ffos Las 5:40** — Golwg Gwendraeth &quot;Confined&quot; Handicap Stakes (For Horses Which Have Not Won A Flat Race In 2026): model **The Stone Power** (cursor, nvidia, groq, gemini?, cerebras, ollama)
-- **Ffos Las 6:10** — Dress For The Occasions Handicap Stakes: model **Noble Grace** (cursor, nvidia, groq, gemini?, cerebras, ollama) · stakes: nvidia 10cr→Noble Grace, groq 14cr→Noble Grace, ollama 15cr→Noble Grace, model 11cr→Noble Grace
-- **Kempton (AW) 5:30** — Unibet/british Stallion Studs Ebf Fillies&#x27; Novice Stakes (gbb Race): model **—** (cursor, nvidia, groq, gemini?, cerebras, ollama)
-- **Kempton (AW) 6:00** — Unibet/Breeders Backing Racing EBF Fillies&#x27; Novice Stakes (GBB/GBBPlus Race): model **Manaar** (cursor, nvidia, groq, gemini?, cerebras, ollama) · stakes: ollama 27cr→Manaar
-- **Kempton (AW) 6:30** — Unibet Support Safer Gambling Handicap Stakes (Div I): model **Orchid** (cursor, nvidia, groq, gemini?, cerebras, ollama) · stakes: cursor 15cr→Arctician, nvidia 5cr→Orchid, groq 15cr→Orchid, cerebras 6cr→Orchid, model 15cr→Orchid
-- **Kempton (AW) 7:00** — Unibet Support Safer Gambling Handicap Stakes (Div II): model **—** (cursor, nvidia, groq, gemini?, cerebras, ollama) · stakes: ollama 23cr→Philanthropist
-- **Kempton (AW) 7:30** — Bet £20 Get £20 With Unibet Handicap Stakes (London Mile Series Qualifier) (Div I): model **—** (cursor, nvidia, groq, gemini?, cerebras, ollama)
-- **Kempton (AW) 8:00** — Bet £20 Get £20 With Unibet Handicap Stakes (London Mile Series Qualifier) (Div II): model **Final Night** (cursor, nvidia, groq, gemini?, cerebras, ollama) · stakes: nvidia 10cr→Final Night, model 20cr→Final Night
-- **Kempton (AW) 8:30** — Unibet More Extra Place Races Handicap Stakes (gbbplus Race): model **Kokbastau** (cursor, nvidia, groq, gemini?, cerebras, ollama)
-- **Kempton (AW) 9:00** — Try Unibet&#x27;s New Improved Acca Boosts Handicap Stakes: model **—** (cursor, nvidia, groq?, gemini?, cerebras, ollama)
-- **Salisbury 2:30** — Michael Brunton Memorial British EBF Novice Stakes (GBB Race): model **—** (cursor, nvidia, groq?, gemini?, cerebras, ollama?) · stakes: cerebras 11cr→Hackpen Hill
-- **Salisbury 3:00** — Frazier Jones Wine Merchants Handicap Stakes: model **—** (cursor, nvidia, groq?, gemini?, cerebras, ollama?)
-</pre></main><nav class="mnav" aria-label="Main"><a href="yesterday.html"><span class="ic" aria-hidden="true"><svg viewBox="0 0 24 24" focusable="false"><path d="M15 6l-6 6 6 6"/></svg></span><span class="lab">11 Aug</span></a><a href="index.html"><span class="ic" aria-hidden="true"><svg viewBox="0 0 24 24" focusable="false"><path d="M4 11.5L12 4l8 7.5"/><path d="M7 10.5V20h10v-9.5"/><path d="M10 20v-5h4v5"/></svg></span><span class="lab">12 Aug</span></a><a href="tomorrow.html"><span class="ic" aria-hidden="true"><svg viewBox="0 0 24 24" focusable="false"><path d="M9 6l6 6-6 6"/></svg></span><span class="lab">13 Aug</span></a></nav></body></html>
+- **Beverley 2:15** — Racing TV Club Day EBF Fillies&#x27; Novice Stakes (GBB Race): model **Not My Type** (cursor, nvidia, groq, gemini, cerebras, ollama) · stakes: gemini 20cr→What A Girl Wants, model 26cr→Not My Type
+- **Beverley 2:45** — Welcome Racing TV Club Members Nursery Handicap Stakes: model **—** (cursor, nvidia, groq, gemini, cerebras, ollama) · stakes: cursor 12cr→Lairy Mary, nvidia 5cr→Lairy Mary, groq 10cr→Lairy Mary
+- **Beverley 3:15** — Hornsea Ladies At The Races Nursery Handicap Stakes: model **Ariane Sky** (cursor, nvidia, groq, gemini, cerebras, ollama)
+- **Beverley 3:45** — Connexin Super Fast Sprint Handicap Stakes: model **—** (cursor, nvidia, groq, gemini, cerebras, ollama) · stakes: groq 8cr→Shazani, gemini 12cr→Ingleby Archie, cerebras 21cr→Shazani
+- **Beverley 4:15** — Middle Distance Handicap Stakes: model **—** (cursor, nvidia, groq, gemini, cerebras, ollama) · stakes: groq 16cr→Sisterandbrother, ollama 54cr→Mr Moonshine
+- **Beverley 4:45** — Racing Again On Saturday 29 August Handicap Stakes: model **—** (cursor, nvidia, groq, gemini, cerebras, ollama) · stakes: cursor 8cr→Copper And Five, gemini 26cr→Copper And Five
+- **Lingfield (AW) 5:23** — Free Tips On attheraces.com Handicap Stakes: model **—** (cursor, nvidia, groq, gemini, cerebras, ollama) · stakes: gemini 21cr→Kaaranah, cerebras 29cr→Kaaranah, ollama 27cr→Kaaranah
+- **Lingfield (AW) 5:58** — Follow @AtTheRaces On X EBF Restricted Maiden Stakes (For Horses In Band D) (EBF Restricted Race Qualifier) (GBB Race): model **—** (cursor, nvidia, groq, gemini, cerebras, ollama)
+- **Lingfield (AW) 6:28** — Emilies 21st Birthday Handicap Stakes: model **Split Elevens** (cursor, nvidia, groq, gemini, cerebras, ollama) · stakes: cursor 5cr→Split Elevens, nvidia 5cr→Split Elevens, groq 11cr→Split Elevens, gemini 11cr→Split Elevens, cerebras 7cr→Elvetham, model 11cr→Split Elevens
+- **Lingfield (AW) 6:58** — Sky Sports Racing Sky 415 Classified Stakes: model **—** (cursor, nvidia, groq, gemini?, cerebras, ollama) · stakes: cursor 25cr→Porfin, groq 12cr→Porfin
+- **Lingfield (AW) 7:28** — Become A Friend Of Racing Welfare Fillies&#x27; Novice Stakes (GBB/GBBPlus Race): model **Dove Tale** (cursor, nvidia, groq, gemini, cerebras, ollama) · stakes: cerebras 19cr→Shangri La, ollama 41cr→Dove Tale
+- **Lingfield (AW) 7:58** — Download The At The Races App Nursery Handicap Stakes: model **—** (cursor, nvidia, groq, gemini?, cerebras)
+- **Salisbury 5:30** — Al Basti Equiworld, Dubai Apprentice Handicap Stakes (Whips To Be Carried, But Not Used) (Part Of Racing Excellence): model **—** (cursor, nvidia, groq, gemini?, cerebras, ollama) · stakes: ollama 13cr→Kimeko Glory
+- **Salisbury 6:04** — Al Basti Equiworld, Dubai British EBF Fillies&#x27; Restricted Novice Stakes (For Horses In Bands B, C And D) (EBF Restricted Race Qualifier) (GBB Race): model **Flooding** (cursor, nvidia, groq, gemini?, cerebras, ollama)
+- **Salisbury 6:34** — Colin Hinton &amp; Mitch Hinton Novice Stakes (GBB Race): model **—** (cursor, nvidia, groq, gemini?, cerebras, ollama)
+- **Salisbury 7:04** — Tattersalls £40,000 EBF Fillies&#x27; Novice Stakes (GBB/GBBPlus Race): model **Clarity** (cursor, nvidia, groq?, gemini?, cerebras, ollama) · stakes: model 12cr→Clarity
+- **Salisbury 7:34** — British EBF Premier Fillies&#x27; Handicap Stakes (GBBPlus Race): model **Green Sky** (cursor, nvidia, groq?, gemini?, cerebras, ollama)
+- **Salisbury 8:04** — Venture Security Handicap Stakes: model **Supplicate** (cursor, nvidia, groq?, gemini?, cerebras, ollama?) · stakes: nvidia 10cr→Supplicate, model 17cr→Supplicate
+- **Windsor 5:36** — Play The Matchbook Match 6 Handicap Stakes: model **—** (cursor, nvidia, groq?, gemini?, cerebras, ollama?) · stakes: cursor 10cr→Madman
+</pre></main><nav class="mnav" aria-label="Main"><a href="yesterday.html"><span class="ic" aria-hidden="true"><svg viewBox="0 0 24 24" focusable="false"><path d="M15 6l-6 6 6 6"/></svg></span><span class="lab">12 Aug</span></a><a href="index.html"><span class="ic" aria-hidden="true"><svg viewBox="0 0 24 24" focusable="false"><path d="M4 11.5L12 4l8 7.5"/><path d="M7 10.5V20h10v-9.5"/><path d="M10 20v-5h4v5"/></svg></span><span class="lab">13 Aug</span></a><a href="tomorrow.html"><span class="ic" aria-hidden="true"><svg viewBox="0 0 24 24" focusable="false"><path d="M9 6l6 6-6 6"/></svg></span><span class="lab">14 Aug</span></a></nav></body></html>
