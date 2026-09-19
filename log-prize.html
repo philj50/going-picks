@@ -158,6 +158,9 @@ body.mday-tomorrow .mrole{background:#eef3ef}
 .ai-runner.winner{color:#2f7a50;background:#eef8f1;border-radius:6px;padding-left:7px;padding-right:7px}
 .ai-runner.consensus-wrong{color:#a43e32;background:#fbefed;border-radius:6px;padding-left:7px;padding-right:7px}
 .mmeet-odds{flex:none; color:var(--ink-3,#8a8272); font-variant-numeric:tabular-nums; font-size:13px}
+.mmeet-odds.mnr,.mnr-name{color:var(--ink-3,#8a8272); font-weight:700}
+.mmeet-runner.mnr{opacity:.72}
+.mmeet-runner.mnr .listed-horse-name{text-decoration:line-through; text-decoration-thickness:1px}
 .mmeet-rname{display:flex; align-items:center; gap:7px; min-width:0; flex:1}
 .mmeet-rname .listed-horse-name{min-width:0}
 .msilk{flex:none; width:22px; height:18px; object-fit:contain; display:inline-block;
@@ -270,6 +273,11 @@ body.mday-tomorrow .mrole{background:#eef3ef}
 .mname-row{display:flex; align-items:flex-start; gap:8px; margin-bottom:2px}
 .mname-row .mrank{flex:none; padding-top:3px}
 .mname-row .msilk{flex:none; width:28px; height:22px; margin-top:2px}
+.mcloth{flex:none; display:inline-block; min-width:1.1em; margin-right:5px;
+  font-weight:700; font-variant-numeric:tabular-nums; color:var(--ink-3,#8a8272);
+  font-size:13px; line-height:1.25; padding-top:2px}
+.mname-row .mcloth{padding-top:3px; font-size:14px; color:var(--ink-2,#55503f)}
+.mmeet-rname .mcloth,.ai-runner .mcloth{margin-right:5px; padding-top:0; font-size:12.5px}
 .mrank{font-size:13px; color:var(--ink-3,#8a8272); font-variant-numeric:tabular-nums; min-width:20px}
 .mname{font-weight:700; font-size:17px; flex:1; min-width:0; line-height:1.25;
   white-space:normal; overflow:visible}
@@ -670,84 +678,57 @@ a.mnap.pick:active{opacity:.92}
 .mentity-top .mstat-legs{gap:6px}
 .mcfg{margin:12px;padding:14px;background:var(--surface,#fffdf7);border-radius:14px;border:1px solid var(--hairline,#e5ddc9)}.mcfg-row{display:flex;justify-content:space-between;align-items:center;gap:12px;padding:10px 0;border-bottom:1px solid var(--hairline,#e5ddc9);font-size:14px}.mcfg-row input[type=number]{width:90px;padding:6px 8px;border-radius:8px;border:1px solid var(--hairline,#e5ddc9)}.mcfg-explain>span{display:flex;flex-direction:column;gap:2px}.mcfg-explain small{max-width:210px;color:var(--ink-3,#8a8272);line-height:1.25}.mcfg-explain>b{font-size:12.5px;text-align:right}.mcfg-more{margin:8px 0 14px}.mcfg-more>summary{cursor:pointer;font-weight:700;color:var(--brass,#a07d2a);padding:8px 0}.mwbars{margin:4px 0 8px}.mwbar{display:grid;grid-template-columns:minmax(0,6.6rem) 1fr 3.4rem;gap:8px;align-items:center;margin:0 0 7px;font-size:12px}.mwbar>span{color:var(--ink-2,#55503f);line-height:1.2;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}.mwbar .wt{height:10px;background:var(--surface-2,#f2ecdb);border-radius:5px;overflow:hidden}.mwbar .wt i{display:block;height:100%;border-radius:5px;background:linear-gradient(90deg,var(--brass-dim,#8a6a22),var(--brass,#a07d2a))}.mwbar .wt i.dead{background:var(--ink-3,#8a8272);opacity:.4}.mwbar .wv{font-family:ui-monospace,SFMono-Regular,Menlo,monospace;font-size:11px;text-align:right;color:var(--ink-2,#55503f);font-variant-numeric:tabular-nums;white-space:nowrap}.mflow-card{margin:0 0 14px;padding:12px;border-radius:14px;background:linear-gradient(165deg,#fffdf7 0%,#f2ecdb 55%,#ebe3cf 100%);border:1px solid var(--brass,#a07d2a);box-shadow:0 8px 20px -14px rgba(160,125,42,.55)}.mflow-h{font-family:Georgia,serif;font-size:17px;font-weight:700;letter-spacing:-.02em;color:var(--ink,#1c1a15);margin:0 0 10px}.mflow{display:grid;grid-template-columns:1fr 1fr;gap:8px 10px;margin:0}.mflow-tile{display:flex;gap:8px;align-items:flex-start;padding:10px;background:var(--surface,#fffdf7);border:1px solid var(--hairline,#e5ddc9);border-radius:12px;min-height:4.6rem;box-shadow:0 1px 2px rgba(28,26,21,.04)}.mflow-n{flex:none;width:24px;height:24px;border-radius:8px;background:var(--brass,#a07d2a);color:#1a1407;font-size:12px;font-weight:800;display:flex;align-items:center;justify-content:center}.mflow-body b{display:block;font-size:13.5px;font-weight:750;margin:0 0 3px;color:var(--ink,#1c1a15)}.mflow-body small{display:block;font-size:11.5px;color:var(--ink-2,#55503f);line-height:1.35}.mflow-arrow{display:none}.mimp{padding:9px 0;border-bottom:1px solid var(--hairline,#e5ddc9);font-size:13px;line-height:1.35}.mimp small{display:block;color:var(--ink-3,#8a8272);margin-top:3px}.mlog{margin:12px;padding:14px;background:var(--surface,#fffdf7);border-radius:14px;border:1px solid var(--hairline,#e5ddc9);font-size:12.5px;line-height:1.45;white-space:pre-wrap;overflow-x:auto}.mout{margin:8px 12px 0;padding:8px 12px;border-radius:10px;font-size:12.5px;background:var(--surface-2,#f2ecdb);border:1px solid var(--hairline,#e5ddc9);color:var(--ink-2,#55503f)}.mme{margin:10px 12px 0;padding:12px 14px;border-radius:14px;background:var(--surface,#fffdf7);border:1px solid var(--hairline,#e5ddc9)}.mme-h{font-size:13px;font-weight:700;margin-bottom:8px}.mme-row{font-size:13px;padding:4px 0}.mme-exp{margin-top:8px;font-size:13px}.mme-exp summary{font-weight:700;cursor:pointer;color:var(--brass,#a07d2a)}.mnap.bank .mme-exp{padding-top:4px;border-top:1px solid var(--hairline,#e5ddc9)}.ai-prompt{margin:8px 0;padding:10px;background:#fff;border:1px dashed var(--brass,#a07d2a);border-radius:10px}.ai-prompt summary{font-weight:700;font-size:13px;color:var(--brass,#a07d2a);cursor:pointer}</style></head><body class="mobile mday-log theme-light"><div class="mhead"><span class="t">Going</span><span class="d">Sat 19 Sep</span></div><main class="mlist"><div class="mrole"><b>Day log</b> — what happened on 2026-09-19 · also used in AI briefs</div><pre class="mlog"># Going — 2026-09-19
 
-- Card races: **0** · AI report races: **53**
-- Pick of the day: **Flower Show** (Newmarket 1:15)
-- Outstanding voices: **53 races** (cerebras×53, gemini×51, groq×53, ollama×42, openrouter×53, qwen×53)
+- Card races: **0** · AI report races: **20**
+- Outstanding voices: **20 races** (cerebras×20, gemini×20, groq×20, ollama×3, openrouter×20, qwen×20)
+
+## Voice scoreboard (staked hit rate)
+- **Model**: 1/5 (20%)
+- **Cursor**: 0/1 (0%)
+- **NVIDIA**: 0/2 (0%)
+- **Lucy**: 0/5 (0%)
+- **Average**: 3/18 (17%)
 
 ## Credit bankrolls
 - **claude**: 1336cr
 - **openai**: 1260cr
 - **groq**: 328cr
-- **shadow**: 910cr
-- **barney**: 992cr
-- **fiftyfifty**: 1148cr
-- **model**: 643cr
-- **nvidia**: 215cr
-- **cursor**: 304cr
+- **shadow**: 890cr · day -20cr
+- **barney**: 992cr · day -0cr
+- **fiftyfifty**: 1114cr · day -34cr
+- **model**: 662cr · day +19cr
+- **nvidia**: 127cr · day -88cr
+- **cursor**: 243cr · day -61cr
 - **cerebras**: 3155cr
-- **ollama**: 399cr
+- **ollama**: 303cr · day -96cr
 - **gemini**: 1644cr
 - **top3**: 509cr
 - **qwen**: 442cr
 - **openrouter**: 972cr
 
 ## Me bets (paper)
-- £12 **Tabasko** (Chester 5:25) · paper
-- £9 **Blue Force** (Newcastle (AW) 6:30) · paper
-- £10 **Kohana Nation** (Newmarket 3:45) · paper
+- £12 **Tabasko** (Chester 5:25) · settled
+- £9 **Blue Force** (Newcastle (AW) 6:30) · settled
+- £10 **Kohana Nation** (Newmarket 3:45) · settled
 
 ## Races
-- **Ayr 1:20** — Ladbrokes &#x27;Bet £5 Get £30 New Customer Offer&#x27; Handicap Stakes: model **—** (cursor, nvidia, qwen?, groq?, gemini?, openrouter?, cerebras?, ollama) · stakes: cursor 5cr→Theoryofeverything, ollama 8cr→English Oak
+- **Ayr 1:20** — Ladbrokes &#x27;Bet £5 Get £30 New Customer Offer&#x27; Handicap Stakes: model **—** (cursor, nvidia, qwen?, groq?, openrouter?, cerebras?, ollama) · stakes: cursor 5cr→Theoryofeverything, ollama 8cr→English Oak
 - **Ayr 1:55** — Ladbrokes &#x27;Get Racing Bet Builder Winnings Boosts&#x27; Doonside Cup Stakes (Listed Race): model **—** (cursor, nvidia, qwen?, groq?, gemini?, openrouter?, cerebras?, ollama) · stakes: ollama 22cr→Ice Max, shadow 5cr→Ice Max
-- **Ayr 2:30** — Ladbrokes Ayr Silver Cup Handicap Stakes: model **Deep Havana** (cursor, nvidia, qwen?, groq?, gemini, openrouter?, cerebras?, ollama) · stakes: nvidia 17cr→Toyotomi, ollama 7cr→Deep Havana, model 6cr→Deep Havana
+- **Ayr 2:30** — Ladbrokes Ayr Silver Cup Handicap Stakes: model **Deep Havana** (cursor, nvidia, qwen?, groq?, gemini?, openrouter?, cerebras?, ollama) · stakes: nvidia 17cr→Toyotomi, ollama 7cr→Deep Havana, model 6cr→Deep Havana
 - **Ayr 3:05** — Ladbrokes &#x27;New Customers Get 50/1 Old Firm Offer&#x27; Firth Of Clyde (For The Ayrshire Agricultural Challenge Cup) (Group 3): model **—** (cursor, nvidia, qwen?, groq?, gemini?, openrouter?, cerebras?, ollama) · stakes: barney 5cr→Silent Beauty
-- **Ayr 3:40** — Ladbrokes Ayr Gold Cup (Class 2 Heritage Handicap): model **—** (cursor, nvidia, qwen?, groq?, gemini, openrouter?, cerebras?, ollama) · stakes: shadow 5cr→Binhareer
+- **Ayr 3:40** — Ladbrokes Ayr Gold Cup (Class 2 Heritage Handicap): model **—** (cursor, nvidia, qwen?, groq?, gemini?, openrouter?, cerebras?, ollama) · stakes: shadow 5cr→Binhareer
 - **Ayr 4:15** — British Stallion Studs EBF Novice Stakes (GBB Race): model **Amir Lehbab** (cursor, nvidia, qwen?, groq?, gemini?, openrouter?, cerebras?, ollama) · stakes: model 16cr→Amir Lehbab, fiftyfifty 25cr→Amir Lehbab
 - **Ayr 4:50** — Jordan Electrics Handicap Stakes: model **Imperial Guard** (cursor, nvidia, qwen?, groq?, gemini?, openrouter?, cerebras?, ollama)
 - **Chester 2:00** — Vault Money Ebf Fillies&#x27; Novice Stakes (gbb Race): model **Havana Flash** (cursor, nvidia, qwen?, groq?, gemini?, openrouter?, cerebras?, ollama)
 - **Chester 2:35** — John Smith&#x27;s Nursery Handicap Stakes: model **—** (cursor, nvidia, qwen?, groq?, gemini?, openrouter?, cerebras?, ollama) · stakes: nvidia 13cr→Persian Land, ollama 11cr→Persian Land
 - **Chester 3:10** — Destination2 Selling Stakes: model **—** (cursor, nvidia, qwen?, groq?, gemini?, openrouter?, cerebras?, ollama) · stakes: ollama 23cr→Let&#x27;s Dream
 - **Chester 3:46** — Kidsbank Chester Handicap Stakes: model **—** (cursor, nvidia, qwen?, groq?, gemini?, openrouter?, cerebras?, ollama)
-- **Chester 4:17** — Halliwell Jones Handicap Stakes: model **—** (cursor, nvidia, qwen?, groq?, gemini?, openrouter?, cerebras?, ollama?)
-- **Chester 4:52** — Style Joinery Handicap Stakes: model **—** (cursor, nvidia, qwen?, groq?, gemini?, openrouter?, cerebras?, ollama?)
-- **Chester 5:25** — Lord Mayor&#x27;s Spooktacular Fireworks Apprentice Handicap Stakes: model **Tabasko** (cursor, nvidia, qwen?, groq?, gemini?, openrouter?, cerebras?, ollama?)
-- **Newbury 1:02** — Dubai International Airport World Trophy Stakes (Group 3): model **Starlust** (cursor, nvidia, qwen?, groq?, gemini?, openrouter?, cerebras?, ollama?) · stakes: model 17cr→Starlust, shadow 5cr→Starlust, fiftyfifty 25cr→Starlust
+- **Chester 4:17** — Halliwell Jones Handicap Stakes: model **—** (cursor, nvidia, qwen?, groq?, gemini?, openrouter?, cerebras?, ollama)
+- **Chester 4:52** — Style Joinery Handicap Stakes: model **—** (cursor, nvidia, qwen?, groq?, gemini?, openrouter?, cerebras?, ollama)
+- **Chester 5:25** — Lord Mayor&#x27;s Spooktacular Fireworks Apprentice Handicap Stakes: model **Tabasko** (cursor, nvidia, qwen?, groq?, gemini?, openrouter?, cerebras?, ollama)
+- **Newbury 1:02** — Dubai International Airport World Trophy Stakes (Group 3): model **—** (cursor, nvidia, qwen?, groq?, gemini?, openrouter?, cerebras?, ollama?) · stakes: model 17cr→Starlust, shadow 5cr→Starlust, fiftyfifty 25cr→Starlust
 - **Newbury 1:37** — Dubai Duty Free Autumn Cup Handicap Stakes (gbbplus Race): model **—** (cursor, nvidia, qwen?, groq?, gemini?, openrouter?, cerebras?, ollama?)
-- **Newbury 2:12** — Dubai Duty Free Mill Reef Stakes (Group 2) (In Honour Of Ian Balding): model **Nabati** (cursor, nvidia, qwen?, groq?, gemini?, openrouter?, cerebras?, ollama?) · stakes: model 22cr→Nabati, barney 5cr→Arapaho Gold
-- **Newbury 2:47** — Dubai Duty Free Handicap Stakes (gbbplus Race): model **Boyfriend** (cursor, nvidia, qwen?, groq?, gemini?, openrouter?, cerebras?, ollama?) · stakes: model 9cr→Boyfriend
-- **Newbury 3:20** — Pump Technology Metro Rod Partnership Ebf Novice Stakes (gbb Race): model **—** (cursor, nvidia, qwen?, groq?, gemini?, openrouter?, cerebras?, ollama?)
+- **Newbury 2:12** — Dubai Duty Free Mill Reef Stakes (Group 2) (In Honour Of Ian Balding): model **Nabati** (cursor, nvidia, qwen?, groq?, gemini?, openrouter?, cerebras?, ollama) · stakes: model 22cr→Nabati, barney 5cr→Arapaho Gold
+- **Newbury 2:47** — Dubai Duty Free Handicap Stakes (gbbplus Race): model **—** (cursor, nvidia, qwen?, groq?, gemini?, openrouter?, cerebras?, ollama) · stakes: model 9cr→Boyfriend
+- **Newbury 3:20** — Pump Technology Metro Rod Partnership Ebf Novice Stakes (gbb Race): model **—** (cursor, nvidia, qwen?, groq?, gemini?, openrouter?, cerebras?, ollama)
 - **Newbury 3:55** — Conundrum Consulting Handicap Stakes: model **Castle Rock** (cursor, nvidia, qwen?, groq?, gemini?, openrouter?, cerebras?, ollama?)
-- **Newbury 4:30** — Dubai Duty Free Finest Surprise Handicap Stakes: model **—** (cursor, nvidia, qwen?, groq?, gemini?, openrouter?, cerebras?, ollama?)
-- **Newcastle (AW) 4:10** — Quinnbet.com Handicap Stakes: model **—** (cursor, nvidia, qwen?, groq?, gemini?, openrouter?, cerebras?, ollama?)
-- **Newcastle (AW) 4:45** — Quinnbet Best Odds Guaranteed Handicap Stakes: model **—** (cursor, nvidia, qwen?, groq?, gemini?, openrouter?, cerebras?, ollama?)
-- **Newcastle (AW) 5:20** — Quinnbet Extra Place Ebf Restricted Maiden Fillies&#x27; Stakes (for Horses In Bands C And D) (Ebf Restricted Race Qualifier) (GBB Race): model **—** (cursor, nvidia, qwen?, groq?, gemini?, openrouter?, cerebras?, ollama?)
-- **Newcastle (AW) 5:55** — Eric Hussain 58th Birthday Celebration Race Maiden Stakes (gbb Race): model **Grow Old With Me** (cursor, nvidia, qwen?, groq?, gemini?, openrouter?, cerebras?, ollama?)
-- **Newcastle (AW) 6:30** — Mini Golf At High Gosforth Park Handicap Stakes: model **—** (cursor, nvidia, qwen?, groq?, gemini?, openrouter?, cerebras?, ollama?) · stakes: cursor 10cr→Blue Force, nvidia 10cr→Blue Force
-- **Newcastle (AW) 7:00** — Happy Birthday Dave Miller From Probio energy.com Handicap Stakes (Div I): model **—** (cursor, nvidia, qwen?, groq?, gemini?, openrouter?, cerebras?, ollama?)
-- **Newcastle (AW) 7:30** — Happy Birthday Dave Miller From Probio energy.com Handicap Stakes (Div II): model **—** (cursor, nvidia, qwen?, groq?, gemini?, openrouter?, cerebras?, ollama?)
-- **Newcastle (AW) 8:00** — Get Raceday Ready Handicap Stakes: model **—** (cursor, nvidia, qwen?, groq?, gemini?, openrouter?, cerebras?, ollama?)
-- **Newcastle (AW) 8:30** — Get The Inside Track With Raceday-ready.com Apprentice Handicap Stakes: model **—** (cursor, nvidia, qwen?, groq?, gemini?, openrouter?, cerebras?, ollama?)
-- **Newmarket 1:15** — Turners British Ebf Fillies&#x27; Novice Stakes (gbb/gbbplus Race): model **Flower Show** (cursor, nvidia, qwen?, groq?, gemini?, openrouter?, cerebras?, ollama?) · stakes: fiftyfifty 40cr→Flower Show
-- **Newmarket 1:50** — Turners Fillies&#x27; Handicap Stakes: model **—** (cursor, nvidia, qwen?, groq?, gemini?, openrouter?, cerebras?, ollama?)
-- **Newmarket 2:25** — Turners Handicap Stakes: model **—** (cursor, nvidia, qwen?, groq?, gemini?, openrouter?, cerebras?, ollama?)
-- **Newmarket 3:00** — Turners Parks Group Ltd Handicap Stakes (Div I): model **—** (cursor, nvidia, qwen?, groq?, gemini?, openrouter?, cerebras?, ollama?)
-- **Newmarket 3:45** — Turners Parks Group Ltd Handicap Stakes (Div II): model **—** (cursor, nvidia, qwen?, groq?, gemini?, openrouter?, cerebras?, ollama?) · stakes: cursor 5cr→Kohana Nation, nvidia 11cr→Kohana Nation
-- **Newmarket 4:20** — Turners Cesarewitch Trial Handicap Stakes (gbbplus Race): model **In The Breeze** (cursor, nvidia, qwen?, groq?, gemini?, openrouter?, cerebras?, ollama?) · stakes: barney 5cr→In The Breeze
-- **Newmarket 4:55** — Turners Of Soham Novice Stakes (gbb/gbbplus Race): model **—** (cursor, nvidia, qwen?, groq?, gemini?, openrouter?, cerebras?, ollama?) · stakes: cursor 16cr→Super Crown
-- **Newmarket 5:30** — Turners Amateur Jockeys&#x27; Cambridgeshire (Class 4 Handicap) (Special Rider Conditions): model **—** (cursor, nvidia, qwen?, groq?, gemini?, openrouter?, cerebras?, ollama?)
-- **Gowran Park 2:06** — Racing Again October 2nd &amp; 3rd Race: model **—** (cursor, nvidia, qwen?, groq?, gemini?, openrouter?, cerebras?, ollama?)
-- **Gowran Park 2:41** — Irish Stallion Farms EBF Fillies Maiden: model **—** (cursor, nvidia, qwen?, groq?, gemini?, openrouter?, cerebras?, ollama?)
-- **Gowran Park 3:15** — Irish EBF (C &amp; G) Maiden (Smullen Series): model **—** (cursor, nvidia, qwen?, groq?, gemini?, openrouter?, cerebras?, ollama?)
-- **Gowran Park 3:50** — Denny Cordell Lavarack &amp; Lanwades Stud Fillies Stakes (Group 3): model **—** (cursor, nvidia, qwen?, groq?, gemini?, openrouter?, cerebras?, ollama?)
-- **Gowran Park 4:25** — SIS Maiden: model **—** (cursor, nvidia, qwen?, groq?, gemini?, openrouter?, cerebras?, ollama?)
-- **Gowran Park 5:02** — Support The Irish Injured Jockeys Fund Apprentice Handicap: model **—** (cursor, nvidia, qwen?, groq?, gemini?, openrouter?, cerebras?, ollama?)
-- **Gowran Park 5:37** — BOYLE Sports Home Of Early Payout Handicap: model **—** (cursor, nvidia, qwen?, groq?, gemini?, openrouter?, cerebras?, ollama?)
-- **Navan 1:07** — BAR 1 Betting &#x27;Download Our App&#x27; Maiden Hurdle: model **—** (cursor, nvidia, qwen?, groq?, gemini?, openrouter?, cerebras?, ollama?)
-- **Navan 1:42** — SIS, Supporting Irish Racing Handicap Hurdle: model **—** (cursor, nvidia, qwen?, groq?, gemini?, openrouter?, cerebras?, ollama?)
-- **Navan 2:17** — BAR 1 Casino &#x27;Slot Games &amp; Live Casino&#x27; Maiden Hurdle: model **—** (cursor, nvidia, qwen?, groq?, gemini?, openrouter?, cerebras?, ollama?)
-- **Navan 2:52** — Millbrook Food Group 100 Years Celebration Handicap Hurdle (Div I): model **—** (cursor, nvidia, qwen?, groq?, gemini?, openrouter?, cerebras?, ollama?)
-- **Navan 3:26** — Millbrook Food Group 100 Years Celebration Handicap Hurdle (Div II): model **—** (cursor, nvidia, qwen?, groq?, gemini?, openrouter?, cerebras?, ollama?)
-- **Navan 4:02** — Meath Farm Machinery Maiden Hurdle: model **—** (cursor, nvidia, qwen?, groq?, gemini?, openrouter?, cerebras?, ollama?)
-- **Navan 4:35** — Start Your Racing TV Free Trial Now Ladies Handicap Hurdle: model **—** (cursor, nvidia, qwen?, groq?, gemini?, openrouter?, cerebras?, ollama?)
-- **Navan 5:12** — BAR 1 Betting &#x27;Best Odds Guaranteed Overnight&#x27; Flat Race: model **—** (cursor, nvidia, qwen?, groq?, gemini?, openrouter?, cerebras?, ollama?)
 </pre></main><nav class="mnav" aria-label="Main"><a href="yesterday.html"><span class="ic" aria-hidden="true"><svg viewBox="0 0 24 24" focusable="false"><path d="M15 6l-6 6 6 6"/></svg></span><span class="lab">18 Sep</span></a><a href="index.html"><span class="ic" aria-hidden="true"><svg viewBox="0 0 24 24" focusable="false"><path d="M4 11.5L12 4l8 7.5"/><path d="M7 10.5V20h10v-9.5"/><path d="M10 20v-5h4v5"/></svg></span><span class="lab">19 Sep</span></a><a href="tomorrow.html"><span class="ic" aria-hidden="true"><svg viewBox="0 0 24 24" focusable="false"><path d="M9 6l6 6-6 6"/></svg></span><span class="lab">20 Sep</span></a></nav></body></html>
